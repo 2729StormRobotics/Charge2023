@@ -38,6 +38,10 @@ public final class Constants {
         public static final int kLeftRollerMotorPort = 0;
         public static final int kRightRollerMotorPort = 0;
         public static final double kLeftRollerMotorSpeed = 0;
+        public static final double kRightRollerMotorSpeed = 0;
+        public static final double kRollerMotorStopSpeed = 0;
+        public static final double kStopSpeed = 0;
+
 
         public static final int kColorSensorPort = 0;
 

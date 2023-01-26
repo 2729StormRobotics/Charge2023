@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Claw extends SubsystemBase {
@@ -28,7 +29,7 @@ public class Claw extends SubsystemBase {
   private final DoubleSolenoid m_rightPiston;
 
   private final DigitalInput m_clawBeamBreak;
-  private final ColorSensorV3 m_colorsensor;
+  //private final ColorSensorV3 m_colorsensor;
 
 
 
@@ -39,7 +40,7 @@ public class Claw extends SubsystemBase {
     
     m_leftPiston = new DoubleSolenoid(kPneumaticsHubCanId,PneumaticsModuleType.REVPH, kLeftPistonExtendChannel, kLeftPistonRetractChannel);
     m_rightPiston = new DoubleSolenoid(kPneumaticsHubCanId,PneumaticsModuleType.REVPH, kRightPistonExtendChannel, kRightPistonRetractChannel);
-    //m_colorsensor = new ColorSensorV3(kColorSensorPort);
+ // m_colorsensor = new ColorSensorV3(kColorSensorPort);
 
   }
   //initiates the roller motors to pick up game piece
@@ -47,15 +48,36 @@ public void runRollerMotors(double speed) {
   m_leftRollerMotor.set(speed);
   m_rightRollerMotor.set(speed);
 }
+
+public boolean hasPiece() {
+  return !m_clawBeamBreak.get();
+}
+
+//measures the motor current while the motors are running, once the current has spiked certain value (kCurrent) then we know we have a game piece
+public boolean hasPieceV2() {
+  return !(m_rightRollerMotor.getOutputCurrent() > kCurrent);
+}
+
+ //stops both motors
+ public void stopRollerMotors(double kRollerMotorStopSpeed) {
+  if (hasPieceV2()== true) {
+    m_leftRollerMotor.set(kRollerMotorStopSpeed);
+    m_rightRollerMotor.set(kRollerMotorStopSpeed);
+  } 
+
+ 
+}
+
+public void haltMotors(double kRollerMotorStopSpeed) {
+  
+    m_leftRollerMotor.set(0);
+    m_rightRollerMotor.set(0);
+}
+
 //reverses the roller motors to eject game piece
 public void ejectRollerMotors(double kshootSpeed) {
   m_leftRollerMotor.set(kshootSpeed);
   m_rightRollerMotor.set(kshootSpeed);
-}
-  //stops both motors
-public void stopRollerMotors(double kRollerMotorStopSpeed) {
-  m_leftRollerMotor.set(kRollerMotorStopSpeed);
-  m_rightRollerMotor.set(kRollerMotorStopSpeed);
 }
 
 public void extendRightPiston() {
@@ -75,12 +97,10 @@ public void extendLeftPiston () {
   }
 
 
-public boolean hasPiece() {
-  return !m_clawBeamBreak.get();
-}
-
   @Override
   public void periodic() {
+    SmartDashboard.putBoolean("Have Game Piece", hasPiece());
+    SmartDashboard.putNumber("Roller Current Output", m_rightRollerMotor.getOutputCurrent());
     // This method will be called once per scheduler run
   }
 }
