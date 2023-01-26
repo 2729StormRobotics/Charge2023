@@ -4,11 +4,35 @@
 
 package frc.robot;
 
+
+import java.util.logging.Handler;
+import edu.wpi.first.util.sendable.SendableRegistry;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.PS4Controller.Axis;
+import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commandgroups.AutoDriveBackwards;
+import frc.robot.commands.DriveDistance;
+import frc.robot.commands.DriveManuallyArcade;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.commands.PointTurnGyroTank;
+
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import static frc.robot.commandgroups.AutoDriveBackwards.*;
+
+
+import static frc.robot.Constants.*;
+import static frc.robot.Constants.DriveConstants.*;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -17,15 +41,40 @@ import edu.wpi.first.wpilibj2.command.Command;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  // The robot's subsystems and commands are defined here...
+  private final XboxController m_driver = new XboxController(DriveConstants.kDriverControllerPort);
+  private final XboxController m_operator = new XboxController(DriveConstants.kOperatorControllerPort);
+
+  private final Drivetrain m_drivetrain;
+
+  // private final Index m_index;
+  // private final Intake m_intake;
+  // private final Shooter m_shooter;
+  // private final Vision m_vision;
+  // private final Compressor m_testCompressor;
+
+  private final SendableChooser<Command> m_autoChooser;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
+    m_drivetrain = new Drivetrain();
+    // m_index = new Index();
+    // m_intake = new Intake();
+     //m_vision = new Vision();
+    // m_shooter = new Shooter();
+
+    m_autoChooser = new SendableChooser<>();
+    SmartDashboard.putData("Autonomous Selector", m_autoChooser);
+    m_autoChooser.setDefaultOption("Do Nothing", new InstantCommand());
+    m_autoChooser.addOption("AutoDriveBackwards", new AutoDriveBackwards(m_drivetrain));
+   // m_autoChooser.addOption("Wall Shot", new AutoWallShot(m_shooter, m_index, m_drivetrain, m_intake, m_vision));
+
+    m_drivetrain.setDefaultCommand(
+        new DriveManuallyArcade(() -> m_driver.getLeftY(), () -> m_driver.getRightX(), m_drivetrain));
+
     // Configure the button bindings
-    configureButtonBindings();
   }
 
   /**
@@ -34,15 +83,19 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
 
+    
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
+   
    * @return the command to run in autonomous
    */
+
   public Command getAutonomousCommand() {
+    
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return m_autoChooser.getSelected();
+
   }
+
 }

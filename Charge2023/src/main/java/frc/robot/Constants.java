@@ -4,14 +4,8 @@
 
 package frc.robot;
 
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants. This class should not be used for any other purpose. All constants should be declared
- * globally (i.e. public static). Do not put anything functional in this class.
- *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
- */
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -59,6 +53,29 @@ public final class Constants {
         public static final boolean kPawlPistonEnabled = false;
         public static final boolean kPawlPistonDisabled = true;
 
+    }
+
+
+    public static final class IntakeConstants {
+        /*
+        real nums needed for:
+        motor port
+        motor Intake/Reject speed
+        extend/retract
+        */
+        public static final int kIntakeMotorPort = 5;
+        public static final double kIntakeMotorSpeed = -0.50;
+        public static final int kIntakeMotorStopSpeed = 0;
+        public static final int kEjectMotorSpeed = -1;
+
+        public static final int kIntakeExtendChannel = 4;
+        public static final int kIntakeRetractChannel = 5;
+        public static final Value kIntakeExtendValue = Value.kForward;
+        public static final Value kIntakeRetractValue = Value.kReverse;
+       
+
+    }
+
 
     public static final class IndexConstants {
         /*
@@ -104,6 +121,10 @@ public final class Constants {
 
         public static final int kBottomExtendedChannel = 6;
         public static final int kBottomRetractedChannel = 7;
+        
+        public static final Value kPistonExtendedValue = Value.kForward;
+        public static final Value kPistonRetractedValue = Value.kReverse;
+        public static final PneumaticsModuleType kPistonModuleType = PneumaticsModuleType.REVPH;
 
         public static final double kVelocityConversion = 0;
 
@@ -219,12 +240,11 @@ public final class Constants {
         public static final double kTurnSpeed = .25;
 
     }
-DriveConstants
+    
     public static final class ButtonBindingConstants {
         public static final int kDriverControllerPort = 0;
         public static final int kOperatorControllerPort = 1;
     }
 
 
-    }
 }
