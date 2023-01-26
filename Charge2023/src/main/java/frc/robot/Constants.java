@@ -3,6 +3,10 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.I2C.Port;
+
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -28,6 +32,26 @@ package frc.robot;
 public final class Constants {
 
     public static final int kPneumaticsHubCanId = 7;
+
+    public static final class ClawConstants {
+
+        public static final int kLeftRollerMotorPort = 0;
+        public static final int kRightRollerMotorPort = 0;
+        public static final double kLeftRollerMotorSpeed = 0;
+
+        public static final int kColorSensorPort = 0;
+
+
+        public static final int kLeftPistonExtendChannel = 0;
+        public static final int kLeftPistonRetractChannel = 0;
+        public static final Value kLeftPistonExtendValue = Value.kForward;
+        public static final Value kLeftPistonRetractValue = Value.kReverse;
+
+        public static final int kRightPistonExtendChannel = 0;
+        public static final int kRightPistonRetractChannel = 0;
+        public static final Value kRightPistonExtendValue = Value.kForward;
+        public static final Value kRightPistonRetractValue = Value.kReverse;
+    }
 
     public static final class HangerConstants {
         // These are all temporary fill-in values
