@@ -37,7 +37,7 @@ public class Claw extends SubsystemBase {
   public Claw() {
     m_leftRollerMotor = new CANSparkMax(kLeftRollerMotorPort,MotorType.kBrushless);
     m_rightRollerMotor = new CANSparkMax(kRightRollerMotorPort,MotorType.kBrushless);
-    
+    m_clawBeamBreak = new DigitalInput(kBeamBreakPort);
     m_leftPiston = new DoubleSolenoid(kPneumaticsHubCanId,PneumaticsModuleType.REVPH, kLeftPistonExtendChannel, kLeftPistonRetractChannel);
     m_rightPiston = new DoubleSolenoid(kPneumaticsHubCanId,PneumaticsModuleType.REVPH, kRightPistonExtendChannel, kRightPistonRetractChannel);
  // m_colorsensor = new ColorSensorV3(kColorSensorPort);
