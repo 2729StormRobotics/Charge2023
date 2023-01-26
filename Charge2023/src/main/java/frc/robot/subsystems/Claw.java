@@ -39,7 +39,7 @@ public class Claw extends SubsystemBase {
     
     m_leftPiston = new DoubleSolenoid(kPneumaticsHubCanId,PneumaticsModuleType.REVPH, kLeftPistonExtendChannel, kLeftPistonRetractChannel);
     m_rightPiston = new DoubleSolenoid(kPneumaticsHubCanId,PneumaticsModuleType.REVPH, kRightPistonExtendChannel, kRightPistonRetractChannel);
-  m_colorsensor = new ColorSensorV3(kColorSensorPort);
+    //m_colorsensor = new ColorSensorV3(kColorSensorPort);
 
   }
   //initiates the roller motors to pick up game piece
