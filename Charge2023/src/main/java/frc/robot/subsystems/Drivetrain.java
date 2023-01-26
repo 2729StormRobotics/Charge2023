@@ -4,22 +4,37 @@
 
 package frc.robot.subsystems;
 
+import static frc.robot.Constants.DriveConstants.kCurrentLimit;
+import static frc.robot.Constants.DriveConstants.kDriveDistancePerRev;
+import static frc.robot.Constants.DriveConstants.kDriveSpeedPerRev;
+import static frc.robot.Constants.DriveConstants.kLeftA;
+import static frc.robot.Constants.DriveConstants.kLeftFollowerMotorPort;
+import static frc.robot.Constants.DriveConstants.kLeftFollowerMotorReversedDefault;
+import static frc.robot.Constants.DriveConstants.kLeftLeaderMotorPort;
+import static frc.robot.Constants.DriveConstants.kLeftLeaderMotorReversedDefault;
+import static frc.robot.Constants.DriveConstants.kLeftS;
+import static frc.robot.Constants.DriveConstants.kLeftV;
+import static frc.robot.Constants.DriveConstants.kRightA;
+import static frc.robot.Constants.DriveConstants.kRightFollowerMotorPort;
+import static frc.robot.Constants.DriveConstants.kRightFollowerMotorReversedDefault;
+import static frc.robot.Constants.DriveConstants.kRightLeaderMotorPort;
+import static frc.robot.Constants.DriveConstants.kRightLeaderMotorReversedDefault;
+import static frc.robot.Constants.DriveConstants.kRightS;
+import static frc.robot.Constants.DriveConstants.kRightV;
+
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj.ADIS16470_IMU;
-import edu.wpi.first.wpilibj.ADIS16448_IMU.IMUAxis;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import static frc.robot.Constants.DriveConstants.*;
 
 public class Drivetrain extends SubsystemBase {
 
