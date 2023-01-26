@@ -59,29 +59,6 @@ public final class Constants {
         public static final boolean kPawlPistonEnabled = false;
         public static final boolean kPawlPistonDisabled = true;
 
-    }
-
-
-    public static final class IntakeConstants {
-        /*
-        real nums needed for:
-        motor port
-        motor Intake/Reject speed
-        extend/retract
-        */
-        public static final int kIntakeMotorPort = 5;
-        public static final double kIntakeMotorSpeed = -0.50;
-        public static final int kIntakeMotorStopSpeed = 0;
-        public static final int kEjectMotorSpeed = -1;
-
-        public static final int kIntakeExtendChannel = 4;
-        public static final int kIntakeRetractChannel = 5;
-        public static final Value kIntakeExtendValue = Value.kForward;
-        public static final Value kIntakeRetractValue = Value.kReverse;
-       
-
-    }
-
 
     public static final class IndexConstants {
         /*
@@ -127,10 +104,6 @@ public final class Constants {
 
         public static final int kBottomExtendedChannel = 6;
         public static final int kBottomRetractedChannel = 7;
-        
-        public static final Value kPistonExtendedValue = Value.kForward;
-        public static final Value kPistonRetractedValue = Value.kReverse;
-        public static final PneumaticsModuleType kPistonModuleType = PneumaticsModuleType.REVPH;
 
         public static final double kVelocityConversion = 0;
 
@@ -253,4 +226,5 @@ public final class Constants {
     }
 
 
+    }
 }
