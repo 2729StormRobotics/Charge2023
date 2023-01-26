@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Claw extends SubsystemBase {
+  private static final double kCurrent = 0;
   private final CANSparkMax m_leftRollerMotor;
   private final CANSparkMax m_rightRollerMotor;
   private final DoubleSolenoid m_leftPiston;

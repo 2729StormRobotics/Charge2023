@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Claw;
 
 public class ClawEject extends CommandBase {
+  private static final double kshootSpeed = 0;
   private final Claw m_claw;
 
   /** Creates a new ClawPickup. */
