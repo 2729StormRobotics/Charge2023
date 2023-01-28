@@ -28,7 +28,6 @@ public class Claw extends SubsystemBase {
   private final CANSparkMax m_rightRollerMotor;
   private final DoubleSolenoid m_leftPiston;
   private final DoubleSolenoid m_rightPiston;
-
   private final DigitalInput m_clawBeamBreak;
   //private final ColorSensorV3 m_colorsensor;
 

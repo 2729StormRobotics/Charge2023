@@ -30,7 +30,7 @@ public class ClawPickup extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-m_claw.runRollerMotors(speed);
+m_claw.runRollerMotors(0);
 m_claw.stopRollerMotors(kRollerMotorStopSpeed);
   }
 

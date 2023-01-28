@@ -32,7 +32,7 @@ public class ClawConePickup extends CommandBase {
   public void execute() {
 m_claw.extendLeftPiston();
 m_claw.extendRightPiston();
-m_claw.runRollerMotors(speed);
+m_claw.runRollerMotors(0);
 m_claw.stopRollerMotors(kRollerMotorStopSpeed);
 
   }
