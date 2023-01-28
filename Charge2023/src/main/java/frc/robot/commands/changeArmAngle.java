@@ -5,54 +5,56 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Arm;
+import static frc.robot.Constants.ArmConstants.*;
 
-public class PointTurnGyroTank extends CommandBase {
+public class changeArmAngle extends CommandBase {
 
-  private final Drivetrain m_drivetrain;
+  private Arm m_Arm;
 
-  private final double m_speed;
+  private double initialAngle;
+  private double finalAngle;
 
-  private final double m_angle;
+  /** Creates a new changeArmAngle. */
+  public changeArmAngle(Arm subsystem, double degree) {
 
-  
-  /** Creates a new GyroTankPointTurn. */
-  public PointTurnGyroTank(double speed, double angle, Drivetrain drivetrain) {
+    m_Arm = subsystem;
 
-    m_speed = speed;
-    m_drivetrain = drivetrain;
-    m_angle = angle;
-
+    initialAngle = 0;
+    finalAngle = degree;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_drivetrain);
+    addRequirements();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_drivetrain.resetGyro();
-    m_drivetrain.getRobotAngle();
+
+    initialAngle = m_Arm.getArmAngle();
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+                                                 // if else in one line
+    m_Arm.setAngleMotorSpeed(kAngleMotorSpeed * (finalAngle > 0 ? 1 : -1));
 
-    m_drivetrain.tankDrive(m_speed * Math.signum(m_angle), m_speed * Math.signum(m_angle) * -1, false);
   }
 
+  
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_drivetrain.stopDrive();
+
+    m_Arm.setAngleMotorSpeed(0);
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    
-    return Math.abs(m_drivetrain.getRobotAngle()) >= Math.abs(m_angle);
+    return m_Arm.getArmAngle() - initialAngle >= finalAngle;
   }
 }
