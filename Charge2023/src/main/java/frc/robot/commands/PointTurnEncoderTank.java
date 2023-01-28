@@ -6,7 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.Constants.DriveConstants;
+import static frc.robot.Constants.DriveConstants.*;
 
 public class PointTurnEncoderTank extends CommandBase {
   private final Drivetrain m_drivetrain;

@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.Constants.DriveConstants;
 
 
 public class PointTurnGyroTank extends CommandBase {
@@ -33,7 +34,6 @@ public class PointTurnGyroTank extends CommandBase {
   @Override
   public void initialize() {
      m_drivetrain.resetGyro();
-    m_drivetrain.getRobotAngle();
 
   }
 
