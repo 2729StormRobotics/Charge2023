@@ -16,12 +16,15 @@ public class Vision extends SubsystemBase {
   private final NetworkTableEntry m_targetDistance;
   private final NetworkTableEntry m_targetDetected;
 
-  private final NetworkTableEntry m_cameraPose;
-
   private double m_xOffset; // horizontal offset from crosshair to target (-27 degrees to 27 degrees)
   private double m_yOffset; // vertical offset from crosshair to target (-20.5 degrees to 20.5 degrees)
   private double m_percentArea; // target area
   private double m_targetValue; // whether the limelight has an valid targets (0 or 1)
+
+  private double[] m_cameraPose;
+  private double[] m_targetPose;
+
+  private double[] defaultDoubleArray;
 
   
   /** Creates a new Vision. */
@@ -34,8 +37,8 @@ public class Vision extends SubsystemBase {
     m_targetDistance = m_limelightTable.getEntry("Target Distance");
     m_targetDetected = m_limelightTable.getEntry("Target Detected");
 
-    m_cameraPose = m_limelightTable.getEntry("Camera Pose");
-
+    defaultDoubleArray = new double[6];
+    
     turnOnLED();
   }
 
@@ -56,6 +59,14 @@ public class Vision extends SubsystemBase {
   public double getTargetValue(){
     return m_targetValue;
   }
+
+  public double[] getCameraPose(){
+    return m_cameraPose;
+  }
+
+  public double[] getTargetPose(){
+    return m_targetPose;
+  }
   
   public boolean isTargetDetected(){
     return (m_targetValue > 0.0);
@@ -75,7 +86,8 @@ public class Vision extends SubsystemBase {
     m_percentArea = m_limelightTable.getEntry("ta").getDouble(0.0);
     m_targetValue = m_limelightTable.getEntry("tv").getDouble(0.0);
 
-    m_targetValue = m_limelightTable.getEntry("t6c_ts").getDouble(0.0);
+    m_cameraPose = m_limelightTable.getEntry("t6c_ts").getDoubleArray(defaultDoubleArray);
+    m_targetPose = m_limelightTable.getEntry("t6t_cs").getDoubleArray(defaultDoubleArray);
 
     m_targetDetected.setBoolean(isTargetDetected());
   }
