@@ -13,6 +13,9 @@ import static frc.robot.Constants.ArmConstants.*;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+
+// This command group positions the arm to pickup game pieces from the shelf at the substation.
+
 public class shelfPickup extends ParallelCommandGroup {
 
   private final Arm m_arm;

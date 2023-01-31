@@ -35,7 +35,8 @@ public class telescopeToDistance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    // if extend is true, run the motor at a positive speed to extend the arm
+    // if extend is false, run the motor at a negative speed to retract the arm
     m_Arm.setAngleMotorSpeed((distance > m_Arm.getStringPotDistance() ? kAngleMotorSpeed : -kAngleMotorSpeed));
 
   }
@@ -51,8 +52,17 @@ public class telescopeToDistance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
-    return (m_Arm.getStringPotDistance() >= kMaxExtensionLength || m_Arm.getStringPotDistance() <= 0);
+    // stop this command when the arm is fully extended or fully retracted or when the target distance is reached
+    
+    if (m_Arm.getStringPotDistance() >= kMaxExtensionLength) {
+      return false;
+    } else if (m_Arm.getStringPotDistance() <= 0) {
+      return false;
+    } else if (m_Arm.getStringPotDistance() >= distance) {
+      return false;
+    }
+    
+    return true;
 
   }
 

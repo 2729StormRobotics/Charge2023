@@ -13,6 +13,9 @@ import static frc.robot.Constants.ArmConstants.*;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+
+// This command group positions the arm to the high level of the grid in the right position.
+
 public class gridHighRight extends ParallelCommandGroup {
 
   private final Arm m_arm;

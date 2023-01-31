@@ -38,19 +38,19 @@ public class Arm extends SubsystemBase {
   }
 
   public void setExtensionMotorSpeed(double speed) {
-
+    // run the motor that extends the arm
     extensionMotor.set(speed);
 
   }
 
   public void setAngleMotorSpeed(double speed) {
-
+    // run the motor that changes the angle of the arm
     angleMotor.set(speed);
 
   }
 
   public double getStringPotDistance() {
-
+    // get the voltage read by the string potientometer in terms of distance
     return stringPot.get();
 
   }
@@ -62,6 +62,7 @@ public class Arm extends SubsystemBase {
   }
 
   public void resetEncoders() {
+    // reset the angleMotor's encoder
     angleEncoder.setPosition(0);
   }
 
