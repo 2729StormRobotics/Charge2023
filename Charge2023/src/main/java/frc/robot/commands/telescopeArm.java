@@ -8,20 +8,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 import static frc.robot.Constants.ArmConstants.*;
 
-public class changeArmAngle extends CommandBase {
+public class telescopeArm extends CommandBase {
 
   private Arm m_Arm;
 
-  private double initialAngle;
-  private double finalAngle;
+  private boolean extend;
 
-  /** Creates a new changeArmAngle. */
-  public changeArmAngle(Arm subsystem, double degree) {
+  /** Creates a new telescopeArm. */
+  public telescopeArm(Arm subsystem, boolean ext) {
 
     m_Arm = subsystem;
-
-    initialAngle = 0;
-    finalAngle = degree;
+    extend = ext;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements();
@@ -31,15 +28,15 @@ public class changeArmAngle extends CommandBase {
   @Override
   public void initialize() {
 
-    initialAngle = m_Arm.getArmAngle();
+    m_Arm.setAngleMotorSpeed(0);
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // if else in one line
-    m_Arm.setAngleMotorSpeed(kAngleMotorSpeed * (finalAngle > 0 ? 1 : -1));
+
+    m_Arm.setAngleMotorSpeed((extend ? kAngleMotorSpeed : -kAngleMotorSpeed));
 
   }
 
@@ -54,6 +51,9 @@ public class changeArmAngle extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Math.abs(m_Arm.getArmAngle() - initialAngle) >= Math.abs(finalAngle));
+
+    return (m_Arm.getStringPotDistance() >= kMaxExtensionLength || m_Arm.getStringPotDistance() <= 0);
+
   }
+
 }
