@@ -8,17 +8,20 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 import static frc.robot.Constants.ArmConstants.*;
 
-public class telescopeArm extends CommandBase {
+public class ChangeArmAngle extends CommandBase {
 
   private Arm m_Arm;
 
-  private boolean extend;
+  private double initialAngle;
+  private double finalAngle;
 
-  /** Creates a new telescopeArm. */
-  public telescopeArm(Arm subsystem, boolean ext) {
+  /** Creates a new changeArmAngle. */
+  public ChangeArmAngle(Arm subsystem, double degree) {
 
     m_Arm = subsystem;
-    extend = ext;
+
+    initialAngle = 0;
+    finalAngle = degree;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements();
@@ -27,24 +30,23 @@ public class telescopeArm extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
-    m_Arm.setAngleMotorSpeed(0);
+    // get the initial angle of the robot
+    initialAngle = m_Arm.getArmAngle();
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // if extend is true, run the motor at a positive speed to extend the arm
-    // if extend is false, run the motor at a negative speed to retract the arm
-    m_Arm.setAngleMotorSpeed((extend ? kAngleMotorSpeed : -kAngleMotorSpeed));
+    // run the motor at a positive speed to rotate the arm upward, and negative to rotate downward
+    // if else in one line
+    m_Arm.setAngleMotorSpeed(kAngleMotorSpeed * (finalAngle > 0 ? 1 : -1));
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
     m_Arm.setAngleMotorSpeed(0);
 
   }
@@ -52,9 +54,7 @@ public class telescopeArm extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // stop this command when the arm is fully extended or fully retracted
-    return (m_Arm.getStringPotDistance() >= kMaxExtensionLength || m_Arm.getStringPotDistance() <= 0);
-
+    // stop the motor after reaching the desired angle
+    return (Math.abs(m_Arm.getArmAngle() - initialAngle) >= Math.abs(finalAngle));
   }
-
 }

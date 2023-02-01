@@ -16,13 +16,13 @@ import static frc.robot.Constants.ArmConstants.*;
 
 // This command group positions the arm to the mid level of the grid in the mid position.
 
-public class gridMidMid extends ParallelCommandGroup {
+public class GridMidMid extends ParallelCommandGroup {
 
   private final Arm m_arm;
   private final Drivetrain m_drivetrain;
 
   /** Creates a new gridHighLeft. */
-  public gridMidMid(Arm arm, Drivetrain drivetrain) {
+  public GridMidMid(Arm arm, Drivetrain drivetrain) {
 
     m_arm = arm;
     m_drivetrain = drivetrain;

@@ -14,23 +14,21 @@ import static frc.robot.Constants.ArmConstants.*;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 
-// This command group positions the arm to the high level of the grid in the left position.
+// This command group positions the arm to pickup game pieces from the shelf at the substation.
 
-public class gridHighLeft extends ParallelCommandGroup {
+public class ShelfPickup extends ParallelCommandGroup {
 
   private final Arm m_arm;
-  private final Drivetrain m_drivetrain;
 
   /** Creates a new gridHighLeft. */
-  public gridHighLeft(Arm arm, Drivetrain drivetrain) {
+  public ShelfPickup(Arm arm) {
 
     m_arm = arm;
-    m_drivetrain = drivetrain;
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
 
-    // REPLACE POINTTURN WITH ACTUAL NAME OF COMMAND
-    addCommands(new PointTurn(m_drivetrain, leftHorizontalShift), new changeArmAngle(m_arm, highConeAngle), new telescopeToDistance(m_arm, highExtensionDistance)); 
-      }
+
+    addCommands(new changeArmAngle(m_arm, shelfAngle), new telescopeToDistance(m_arm, shelfExtensionDistance)); 
+  }
 }

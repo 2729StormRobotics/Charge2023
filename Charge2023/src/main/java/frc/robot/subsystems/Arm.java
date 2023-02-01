@@ -69,5 +69,9 @@ public class Arm extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+
+    // TODO
+    // add shuffleboard / smartdashboard integration
+    // try using robot sim?
   }
 }

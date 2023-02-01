@@ -14,15 +14,15 @@ import static frc.robot.Constants.ArmConstants.*;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 
-// This command group positions the arm to the low level of the grid in the right position.
+// This command group positions the arm to the high level of the grid in the left position.
 
-public class gridLowRight extends ParallelCommandGroup {
+public class GridHighLeft extends ParallelCommandGroup {
 
   private final Arm m_arm;
   private final Drivetrain m_drivetrain;
 
   /** Creates a new gridHighLeft. */
-  public gridLowRight(Arm arm, Drivetrain drivetrain) {
+  public GridHighLeft(Arm arm, Drivetrain drivetrain) {
 
     m_arm = arm;
     m_drivetrain = drivetrain;
@@ -31,6 +31,6 @@ public class gridLowRight extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
 
     // REPLACE POINTTURN WITH ACTUAL NAME OF COMMAND
-    addCommands(new PointTurn(m_drivetrain, rightHorizontalShift), new changeArmAngle(m_arm, lowAngle), new telescopeToDistance(m_arm, lowExtensionDistance)); 
-  }
+    addCommands(new PointTurn(m_drivetrain, leftHorizontalShift), new changeArmAngle(m_arm, highConeAngle), new telescopeToDistance(m_arm, highExtensionDistance)); 
+      }
 }
