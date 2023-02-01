@@ -21,11 +21,9 @@ public class Vision extends SubsystemBase {
   private double m_percentArea; // target area
   private double m_targetValue; // whether the limelight has an valid targets (0 or 1)
 
-  private double[] m_cameraPose;
-  private double[] m_targetPose;
+  private double[] m_targetPose; // 
 
   private double[] defaultDoubleArray;
-
   
   /** Creates a new Vision. */
   public Vision() {
@@ -60,16 +58,21 @@ public class Vision extends SubsystemBase {
     return m_targetValue;
   }
 
-  public double[] getCameraPose(){
-    return m_cameraPose;
-  }
-
   public double[] getTargetPose(){
     return m_targetPose;
   }
   
   public boolean isTargetDetected(){
     return (m_targetValue > 0.0);
+  }
+
+  public double getAprilTagAngle(){
+    double aprilTagAngle;
+
+    aprilTagAngle = Math.atan(m_targetPose[0]/m_targetPose[2]);
+    aprilTagAngle = Math.toDegrees(aprilTagAngle);
+
+    return aprilTagAngle;
   }
 
   public void turnOnLED(){
@@ -86,7 +89,6 @@ public class Vision extends SubsystemBase {
     m_percentArea = m_limelightTable.getEntry("ta").getDouble(0.0);
     m_targetValue = m_limelightTable.getEntry("tv").getDouble(0.0);
 
-    m_cameraPose = m_limelightTable.getEntry("t6c_ts").getDoubleArray(defaultDoubleArray);
     m_targetPose = m_limelightTable.getEntry("t6t_cs").getDoubleArray(defaultDoubleArray);
 
     m_targetDetected.setBoolean(isTargetDetected());
@@ -96,5 +98,6 @@ public class Vision extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    updateLimeLight();
   }
 }
