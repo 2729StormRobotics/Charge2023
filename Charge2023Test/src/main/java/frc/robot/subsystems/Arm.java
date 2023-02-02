@@ -22,7 +22,7 @@ public class Arm extends SubsystemBase {
   private AnalogPotentiometer stringPot;
   private RelativeEncoder angleEncoder;
 
-  /** Creates a new Arm. */
+  /** Creates a new Arm 💪 */
   public Arm() {
 
     extensionMotor = new CANSparkMax(kExtensionMotorPort, MotorType.kBrushless);
