@@ -21,9 +21,8 @@ public class Vision extends SubsystemBase {
   private double m_percentArea; // target area
   private double m_targetValue; // whether the limelight has an valid targets (0 or 1)
 
-  private double[] m_targetPose; // 
-
-  private double[] defaultDoubleArray;
+  private double[] m_targetPose; // Array of {x,y,z,rx,ry,rz} that will contain the position of the target (point of interest) relative to the camera📷
+  private double[] defaultDoubleArray; // This will be a double array of length 6 that will be returned by default if the limelight doesn't detect anything 
   
   /** Creates a new Vision. */
   public Vision() {
@@ -35,6 +34,7 @@ public class Vision extends SubsystemBase {
     m_targetDistance = m_limelightTable.getEntry("Target Distance");
     m_targetDetected = m_limelightTable.getEntry("Target Detected");
 
+    // Instantiate the default double array
     defaultDoubleArray = new double[6];
     
     turnOnLED();
@@ -50,22 +50,27 @@ public class Vision extends SubsystemBase {
     return m_yOffset;
   }
 
+  // Returns the percent of the limelight that sees the area
   public double getpercentArea(){
     return m_percentArea;
   }
 
+  // Returns target value (0 if has target 1 if not)
   public double getTargetValue(){
     return m_targetValue;
   }
 
+  // Returns target position in camera space (z out from the front of the camera, x is to the right, y is down)
   public double[] getTargetPose(){
     return m_targetPose;
   }
   
+  // Returns a boolean for if a target is currently detected
   public boolean isTargetDetected(){
     return (m_targetValue > 0.0);
   }
 
+  //Returns angle in between direction robot is facing and point of interest
   public double getAprilTagAngle(){
     double aprilTagAngle;
 
@@ -75,6 +80,11 @@ public class Vision extends SubsystemBase {
     return aprilTagAngle;
   }
 
+  public double getAprilTagDistance(){ //Grabs the distance assuming pointing directly at it
+    return m_targetPose[2];
+  }
+
+  
   public void turnOnLED(){
     m_limelightTable.getEntry("LED Mode").setNumber(3);
   }
@@ -83,6 +93,8 @@ public class Vision extends SubsystemBase {
     m_limelightTable.getEntry("LED Mode").setNumber(1);
   }
 
+
+  // Updates all the values to what the limelight is currently seeing
   public void updateLimeLight(){
     m_xOffset = m_limelightTable.getEntry("tx").getDouble(0.0);
     m_yOffset = m_limelightTable.getEntry("ty").getDouble(0.0);

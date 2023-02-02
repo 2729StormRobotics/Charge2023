@@ -14,13 +14,14 @@ import static frc.robot.Constants.VisionConstants.*;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class VisionAlignToAprilTags extends PIDCommand {
+public class VisionPointToPointOfInference extends PIDCommand {
 
   private final Vision m_vision;
   private final Drivetrain m_drivetrain;
 
+  // Uses pid to rotate robot so it is facing the point of interest
   /** Creates a new VisionAprilTags. */
-  public VisionAlignToAprilTags(Vision vision, Drivetrain drivetrain) {
+  public VisionPointToPointOfInference(Vision vision, Drivetrain drivetrain) {
     super(
         // The controller that the command will use
         new PIDController(0, 0, 0),
@@ -41,6 +42,7 @@ public class VisionAlignToAprilTags extends PIDCommand {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_vision);
     addRequirements(m_drivetrain);
+
 
     // Configure additional PID options by calling `getController` here.
     getController().setTolerance(0, 0);
