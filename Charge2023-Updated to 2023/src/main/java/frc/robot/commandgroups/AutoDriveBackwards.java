@@ -9,7 +9,9 @@ package frc.robot.commandgroups;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.DriveDistance;
+import frc.robot.commands.PIDbalancechargestation;
 import frc.robot.commands.PointTurnGyroTank;
+import frc.robot.commands.upanddowngyro;
 import frc.robot.subsystems.Drivetrain;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -21,6 +23,7 @@ public class AutoDriveBackwards extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     //addCommands(new DriveDistance(drivetrain, -0.3, 50));
-    addCommands(new PointTurnGyroTank(0.6, 90, drivetrain));
+    //addCommands(new PointTurnGyroTank(0.1, 90, drivetrain));
+    addCommands(new PIDbalancechargestation(0, 0, drivetrain));
   }
 }
