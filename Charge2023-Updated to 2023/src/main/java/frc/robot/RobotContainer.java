@@ -67,8 +67,8 @@ public class RobotContainer {
 
     m_autoChooser = new SendableChooser<>();
     SmartDashboard.putData("Autonomous Selector", m_autoChooser);
-    m_autoChooser.setDefaultOption("Do Nothing", new InstantCommand());
-    m_autoChooser.addOption("AutoDriveBackwards", new AutoDriveBackwards(m_drivetrain));
+    //m_autoChooser.setDefaultOption("Do Nothing", new InstantCommand());
+    m_autoChooser.addOption("DriveBackwardsAndBalance", new DriveBackwardsAndBalance(m_drivetrain));
    // m_autoChooser.addOption("Wall Shot", new AutoWallShot(m_shooter, m_index, m_drivetrain, m_intake, m_vision));
 
     m_drivetrain.setDefaultCommand(

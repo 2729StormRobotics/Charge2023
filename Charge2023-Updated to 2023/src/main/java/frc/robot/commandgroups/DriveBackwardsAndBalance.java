@@ -17,13 +17,14 @@ import frc.robot.subsystems.Drivetrain;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoDriveBackwards extends SequentialCommandGroup {
+public class DriveBackwardsAndBalance extends SequentialCommandGroup {
   /** Creates a new AutoDriveBackwards. */
-  public AutoDriveBackwards(Drivetrain drivetrain) {
+  public DriveBackwardsAndBalance(Drivetrain drivetrain) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    //addCommands(new DriveDistance(drivetrain, -0.3, 50));
     //addCommands(new PointTurnGyroTank(0.1, 90, drivetrain));
+    
+    addCommands(new DriveDistance(drivetrain, -0.3, 50));
     addCommands(new PIDbalancechargestation(0, 0, drivetrain));
   }
 }
