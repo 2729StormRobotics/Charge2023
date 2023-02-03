@@ -3,9 +3,19 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.I2C.Port;
+
+
+/**
+ * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
+ * constants. This class should not be used for any other purpose. All constants should be declared
+ * globally (i.e. public static). Do not put anything functional in this class.
+ *
+ * <p>It is advised to statically import this class (or one of its inner classes) wherever the
+ * constants are needed, to reduce verbosity.
+ */
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -23,128 +33,30 @@ public final class Constants {
 
     public static final int kPneumaticsHubCanId = 7;
 
-    public static final class HangerConstants {
-        // These are all temporary fill-in values
+    public static final class ClawConstants {
 
-        // Gearing for calculations, given in output turns per motor turn
-        private static final double kGearing = 0.0;
-        // Diameter of the pulley in inches
-        private static final double kPulleyDiameter = 0.0;
-        // Circumference of the pulley in inches
-        public static final double kPulleyCircumference = Math.PI * kPulleyDiameter;
-
-        // Distance per rotation determined by multiplying pulley circumference by the gearing
-        public static final double kDistancePerRotation = kPulleyCircumference * kGearing;
-        // Speed per rotation determined by dividing distance per rotation by 60 seconds
-        public static final double kSpeedPerRotation = kDistancePerRotation / 60;
-
-        // Port numbers for hanger motors
-        public static final int kHangerMotorLeftPort = 1;
-        public static final int kHangerMotorRightPort = 4;
-
-        // Constant speed at which the hanger motor will rotate to extend the elevator
-        public static final double kClimbSpeed = 0.2; //This value is a guess
-        // The maximum extension of the elevator
-        public static final double kMaxHeight = 0.0;
-
-        // Port numberfor the pawl piston
-        public static final int kPawlPistonChannel = 0;
-        // Booleans for when the piston is enabled or disabled to make the code more readable
-        public static final boolean kPawlPistonEnabled = false;
-        public static final boolean kPawlPistonDisabled = true;
-
-    }
+        public static final int kLeftRollerMotorPort = 0;
+        public static final int kRightRollerMotorPort = 0;
+        public static final double kLeftRollerMotorSpeed = 0;
+        public static final double kRightRollerMotorSpeed = 0;
+        public static final double kRollerMotorStopSpeed = 0;
+        public static final double kStopSpeed = 0;
 
 
-    public static final class IntakeConstants {
-        /*
-        real nums needed for:
-        motor port
-        motor Intake/Reject speed
-        extend/retract
-        */
-        public static final int kIntakeMotorPort = 5;
-        public static final double kIntakeMotorSpeed = -0.50;
-        public static final int kIntakeMotorStopSpeed = 0;
-        public static final int kEjectMotorSpeed = -1;
-
-        public static final int kIntakeExtendChannel = 4;
-        public static final int kIntakeRetractChannel = 5;
-        public static final Value kIntakeExtendValue = Value.kForward;
-        public static final Value kIntakeRetractValue = Value.kReverse;
-       
-
-    }
+        public static final int kColorSensorPort = 0;
+        public static final int kBeamBreakPort = 0;
 
 
-    public static final class IndexConstants {
-        /*
-        real nums needed for:
-        motor ports
-        beam braker ports
-        motor speeds
-        */
 
-        public static final int kLowerIndexMotorPort = 10;
-        public static final int kUpperIndexMotorPort = 11;
-        public static final int kLowerIndexBeamBrakerPort = 0;
-        public static final int kUpperIndexBeamBrakerPort = 1;
-        public static final double kLowerIndexMotorSpeed = -0.5;
-        public static final double kUpperIndexMotorSpeed = -0.3;
+        public static final int kLeftPistonExtendChannel = 0;
+        public static final int kLeftPistonRetractChannel = 0;
+        public static final Value kLeftPistonExtendValue = Value.kForward;
+        public static final Value kLeftPistonRetractValue = Value.kReverse;
 
-        public static final int kIndexMotorStopSpeed = 0;
-        public static final int kEjectIndexMotorSpeed = -1;
-
-        public static final String kIndexShuffleboardTabName = "IndexTab";
-    }
-
-
-    public static final class ShooterConstants{
-
-        public static final int kLeftMotorPort = 12;
-        public static final int kRightMotorPort = 13;
-
-        public static final boolean kMotorLeftInverted = false;
-        public static final boolean kMotorRightInverted = false;
-
-        /* SETPOINT SPEEDS */
-        public static final double kHubShotSetpoint = -1250;
-        public static final double kCloseLaunchpadSetpoint = -4000;
-        public static final double kFarLaunchpadSetpoint = -4500;
-        public static final double kWallShotSetpoint = -3500;
-
-        /* MEASURED SPEEDS: THESE SHOULD BE RECALCULATED */
-        public static final double kHubShotActualSpeed = -1000; 
-        public static final double kCloseLaunchpadActualSpeed = -3070;
-        public static final double kFarLaunchpadActualSpeed = -3040;
-        public static final double kWallShotActualSpeed = -2680;
-
-        public static final int kBottomExtendedChannel = 6;
-        public static final int kBottomRetractedChannel = 7;
-        
-        public static final Value kPistonExtendedValue = Value.kForward;
-        public static final Value kPistonRetractedValue = Value.kReverse;
-        public static final PneumaticsModuleType kPistonModuleType = PneumaticsModuleType.REVPH;
-
-        public static final double kVelocityConversion = 0;
-
-        // Used to calculate the feedforward
-        public static final double kS = 0; // static constant
-        public static final double kV = 0; // velocity constant
-        public static final double kA = 0; // accelaration constant
-     
-        // PID values to maintain speed 
-        public static final double kP = 6e-4; // proportional constant
-        public static final double kI = 0; // integral constant 
-        public static final double kD = 0; // derivative constant
-        public static final double kIz = 0; // integral zone
-        public static final double kFF = 0; // feed forward constant
-        public static final double kMinOutput = 0;
-        public static final double kMaxOutput = 0;
-        public static final String kShooterShuffleboardTabName = "Shooter";
-        public static final double kVelocityTolerance = 100;
-        public static final double kTarmacShotSpeed = 0;
-        public static final double kDumpShotSpeed = -1250;
+        public static final int kRightPistonExtendChannel = 0;
+        public static final int kRightPistonRetractChannel = 0;
+        public static final Value kRightPistonExtendValue = Value.kForward;
+        public static final Value kRightPistonRetractValue = Value.kReverse;
     }
 
     public static final class VisionConstants{
@@ -171,9 +83,9 @@ public final class Constants {
 
         // Drive Motor Ports
 
-        public static final int kLeftLeaderMotorPort = 8;
-        public static final int kLeftFollowerMotorPort = 2;
-        public static final int kRightLeaderMotorPort = 6;
+        public static final int kLeftLeaderMotorPort = 9;
+        public static final int kLeftFollowerMotorPort = 6;
+        public static final int kRightLeaderMotorPort = 2;
         public static final int kRightFollowerMotorPort = 3;
 
 
