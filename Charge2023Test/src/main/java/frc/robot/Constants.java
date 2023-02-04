@@ -42,6 +42,32 @@ public final class Constants {
         public static final double kRollerMotorStopSpeed = 0;
         public static final double kStopSpeed = 0;
 
+    public static final class ClawConstants {
+
+        public static final int kLeftRollerMotorPort = 0;
+        public static final int kRightRollerMotorPort = 0;
+        public static final double kLeftRollerMotorSpeed = 0;
+        public static final double kRightRollerMotorSpeed = 0;
+        public static final double kRollerMotorStopSpeed = 0;
+        public static final double kStopSpeed = 0;
+
+
+        public static final int kColorSensorPort = 0;
+        public static final int kBeamBreakPort = 0;
+
+
+        public static final int kLeftPistonExtendChannel = 0;
+        public static final int kLeftPistonRetractChannel = 0;
+        public static final Value kLeftPistonExtendValue = Value.kForward;
+        public static final Value kLeftPistonRetractValue = Value.kReverse;
+
+        public static final int kRightPistonExtendChannel = 0;
+        public static final int kRightPistonRetractChannel = 0;
+        public static final Value kRightPistonExtendValue = Value.kForward;
+        public static final Value kRightPistonRetractValue = Value.kReverse;
+    }
+
+
 
         public static final int kColorSensorPort = 0;
         public static final int kBeamBreakPort = 0;
@@ -156,6 +182,38 @@ public final class Constants {
     public static final class ButtonBindingConstants {
         public static final int kDriverControllerPort = 0;
         public static final int kOperatorControllerPort = 1;
+    }
+
+    public static final class ArmConstants {
+        // need all port nums
+        public static final int kExtensionMotorPort = -1;
+        public static final int kAngleMotorPort = -1;
+        public static final int kStringPotPort = -1;
+
+        // CHANGE kMaxExtensionLengthInEncoderTicks!
+        public static final double kMaxExtensionLengthInEncoderTicks = 5.0;
+        public static final double kMaxExtensionLength = 63.75; // inches
+        // tbd
+        public static final double kAngleMotorSpeed = .5;
+        public static final double kExtensionMotorSpeed = .5;
+        // grid constants
+        public static final double leftHorizontalShift = 0;
+        public static final double midHorizontalShift = 0;
+        public static final double rightHorizontalShift = 0;
+        public static final double lowAngle = 0;
+        public static final double midConeAngle = 0;
+        public static final double highConeAngle = 0;
+        public static final double midCubeAngle = 0;
+        public static final double highCubeAngle = 0;
+        public static final double lowExtensionDistance = 0;
+        public static final double midExtensionDistance = 0;
+        public static final double highExtensionDistance = 0;
+        // shelf constants
+        public static final double shelfAngle = 0;
+        public static final double shelfExtensionDistance = 0;
+        // charge station constants
+        public static final double chargingAngle = 0;
+        public static final double chargingExtensionDistance = 0;
     }
 
 

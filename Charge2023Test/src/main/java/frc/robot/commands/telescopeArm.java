@@ -5,28 +5,58 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Arm;
+import static frc.robot.Constants.ArmConstants.*;
 
-public class telescopeArm extends CommandBase {
+public class TelescopeArm extends CommandBase {
+
+  private Arm m_Arm;
+
+  private boolean extend;
+
   /** Creates a new telescopeArm. */
-  public telescopeArm() {
+  public TelescopeArm(Arm subsystem, boolean ext) {
+
+    m_Arm = subsystem;
+    extend = ext;
+
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements();
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+    m_Arm.setAngleMotorSpeed(0);
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    // if extend is true, run the motor at a positive speed to extend the arm
+    // if extend is false, run the motor at a negative speed to retract the arm
+    m_Arm.setAngleMotorSpeed((extend ? kAngleMotorSpeed : -kAngleMotorSpeed));
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+
+    m_Arm.setAngleMotorSpeed(0);
+
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    // stop this command when the arm is fully extended or fully retracted
+    // return (m_Arm.getStringPotDistance() >= kMaxExtensionLength || m_Arm.getStringPotDistance() <= 0);
+
+    return (m_Arm.getExtendedDistance() >= kMaxExtensionLength || m_Arm.getExtendedDistance() <= 0);
+
   }
+
 }
