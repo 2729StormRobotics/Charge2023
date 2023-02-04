@@ -277,6 +277,9 @@ public final class Constants {
         public static final int kExtensionMotorPort = -1;
         public static final int kAngleMotorPort = -1;
         public static final int kStringPotPort = -1;
+
+        // CHANGE kMaxExtensionLengthInEncoderTicks!
+        public static final double kMaxExtensionLengthInEncoderTicks = 5.0;
         public static final double kMaxExtensionLength = 63.75; // inches
         // tbd
         public static final double kAngleMotorSpeed = .5;

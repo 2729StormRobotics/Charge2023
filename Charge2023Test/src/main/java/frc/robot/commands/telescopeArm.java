@@ -53,7 +53,9 @@ public class TelescopeArm extends CommandBase {
   @Override
   public boolean isFinished() {
     // stop this command when the arm is fully extended or fully retracted
-    return (m_Arm.getStringPotDistance() >= kMaxExtensionLength || m_Arm.getStringPotDistance() <= 0);
+    // return (m_Arm.getStringPotDistance() >= kMaxExtensionLength || m_Arm.getStringPotDistance() <= 0);
+
+    return (m_Arm.getExtendedDistance() >= kMaxExtensionLength || m_Arm.getExtendedDistance() <= 0);
 
   }
 
