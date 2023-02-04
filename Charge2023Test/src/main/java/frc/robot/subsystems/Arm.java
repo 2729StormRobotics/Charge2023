@@ -20,6 +20,7 @@ public class Arm extends SubsystemBase {
   private CANSparkMax extensionMotor;
   private RelativeEncoder extensionEncoder;
   private CANSparkMax angleMotor;
+  private CANSparkMax follow;
   // private AnalogPotentiometer stringPot;
   private RelativeEncoder angleEncoder;
 
@@ -31,6 +32,9 @@ public class Arm extends SubsystemBase {
 
     angleMotor = new CANSparkMax(kAngleMotorPort, MotorType.kBrushless);
     angleEncoder = angleMotor.getEncoder();
+
+    follow = new CANSparkMax(2, MotorType.kBrushless);
+    follow.follow(angleMotor);
 
     // AnalogInput input = new AnalogInput(kStringPotPort);
 

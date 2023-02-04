@@ -55,6 +55,7 @@ public class ChangeArmAngle extends CommandBase {
   @Override
   public boolean isFinished() {
     // stop the motor after reaching the desired angle
-    return (Math.abs(m_Arm.getArmAngle() - initialAngle) >= Math.abs(finalAngle));
+    return false;
+    // return (Math.abs(m_Arm.getArmAngle() - initialAngle) >= Math.abs(finalAngle));
   }
 }
