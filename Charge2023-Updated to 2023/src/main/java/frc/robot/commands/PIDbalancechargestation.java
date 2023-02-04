@@ -45,8 +45,8 @@ private final PIDController m_pidController = new PIDController(kP, kI, kD);
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-   // m_drivetrain.calibrategyro();
-   int anglefirst = m_drivetrain.getRollangle();
+   m_drivetrain.calibrategyro();
+   //int anglefirst = m_drivetrain.getRollangle();
    m_drivetrain.resetGyro();
     
     climbing = 0;
