@@ -63,7 +63,7 @@ public class Arm extends SubsystemBase {
   public double getArmAngle() {
     // * 360 to change rotations into degrees
     // % 360 to change keep angles within 0-360 degrees
-    return angleEncoder.getPosition() * 360 % 360;
+    return angleEncoder.getPosition() / 18.812238693237305 * 360 % 360;
   }
 
   public double getExtendedDistance() {

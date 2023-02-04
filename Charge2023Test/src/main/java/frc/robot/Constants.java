@@ -256,7 +256,7 @@ public final class Constants {
         public static final double kMaxExtensionLengthInEncoderTicks = 5.0;
         public static final double kMaxExtensionLength = 63.75; // inches
         // tbd
-        public static final double kAngleMotorSpeed = .05;
+        public static final double kAngleMotorSpeed = .25;
         public static final double kExtensionMotorSpeed = .05;
         // grid constants
         public static final double leftHorizontalShift = 0;

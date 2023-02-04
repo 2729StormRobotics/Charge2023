@@ -30,9 +30,7 @@ public class ChangeArmAngle extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // get the initial angle of the robot
     initialAngle = m_Arm.getArmAngle();
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -55,7 +53,7 @@ public class ChangeArmAngle extends CommandBase {
   @Override
   public boolean isFinished() {
     // stop the motor after reaching the desired angle
-    return false;
-    // return (Math.abs(m_Arm.getArmAngle() - initialAngle) >= Math.abs(finalAngle));
+    // return false;
+    return (Math.abs(m_Arm.getArmAngle() - initialAngle) >= Math.abs(finalAngle));
   }
 }
