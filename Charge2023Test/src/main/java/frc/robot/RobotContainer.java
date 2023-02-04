@@ -43,23 +43,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
 
-    m_drivetrain = new Drivetrain();
-    // m_index = new Index();
-    // m_intake = new Intake();
-     //m_vision = new Vision();
-    // m_shooter = new Shooter();
-
-    m_autoChooser = new SendableChooser<>();
-    SmartDashboard.putData("Autonomous Selector", m_autoChooser);
-    //m_autoChooser.setDefaultOption("Do Nothing", new InstantCommand());
-    m_autoChooser.addOption("DriveBackwardsAndBalance", new DriveBackwardsAndBalance(m_drivetrain));
-   // m_autoChooser.addOption("Wall Shot", new AutoWallShot(m_shooter, m_index, m_drivetrain, m_intake, m_vision));
-
-    m_drivetrain.setDefaultCommand(
-        new DriveManuallyArcade(() -> m_driver.getLeftY(), () -> m_driver.getRightX(), m_drivetrain));
-
     arm = new Arm();
-
 
     // Configure the button bindings
     configureButtonBindings();
