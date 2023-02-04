@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commandgroups.AutoDriveBackwards;
+import frc.robot.commandgroups.DriveBackwardsAndBalance;
 import frc.robot.commands.ChangeArmAngle;
 import frc.robot.commands.DriveManuallyArcade;
 import frc.robot.commands.ExampleCommand;
@@ -43,13 +44,13 @@ public class RobotContainer {
    */
   public RobotContainer() {
 
-    m_drivetrain = new Drivetrain();
+    Drivetrain m_drivetrain = new Drivetrain();
     // m_index = new Index();
     // m_intake = new Intake();
      //m_vision = new Vision();
     // m_shooter = new Shooter();
 
-    m_autoChooser = new SendableChooser<>();
+    SendableChooser m_autoChooser = new SendableChooser<>();
     SmartDashboard.putData("Autonomous Selector", m_autoChooser);
     //m_autoChooser.setDefaultOption("Do Nothing", new InstantCommand());
     m_autoChooser.addOption("DriveBackwardsAndBalance", new DriveBackwardsAndBalance(m_drivetrain));
@@ -77,10 +78,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     new JoystickButton(m_operator, Button.kA.value).whileTrue(
-      new ChangeArmAngle(arm, arm.getArmAngle() + 30));
+      new ChangeArmAngle(arm, 90));
 
     new JoystickButton(m_operator, Button.kB.value).whileTrue(
-      new ChangeArmAngle(arm, arm.getArmAngle() - 30));
+      new ChangeArmAngle(arm, 90));
 
   }
 
