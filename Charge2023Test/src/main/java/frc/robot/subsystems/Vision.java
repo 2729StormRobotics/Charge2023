@@ -8,6 +8,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Vision extends SubsystemBase {
   
@@ -111,5 +112,9 @@ public class Vision extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     updateLimeLight();
+    SmartDashboard.putNumber("tv", getTargetValue());
+    SmartDashboard.putNumber("tx", getXOffset() );
+    SmartDashboard.putNumber("ty", getYOffset());
+    SmartDashboard.putNumber("ta", getpercentArea() );
   }
 }
