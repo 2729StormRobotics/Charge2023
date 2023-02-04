@@ -4,57 +4,58 @@
 
 package frc.robot.commands;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
-
-public class PointTurnGyroTank extends CommandBase {
+public class DriveManuallyArcade extends CommandBase {
+  /** Creates a new ArcadeDriveManually. */
 
   private final Drivetrain m_drivetrain;
 
-  private final double m_speed;
+  private final DoubleSupplier m_straightSpeed;
+  private final DoubleSupplier m_turnSpeed;
 
-  private final double m_angle;
+  private double m_currentSpeed;
 
-  
-  /** Creates a new GyroTankPointTurn. */
-  public PointTurnGyroTank(double speed, double angle, Drivetrain drivetrain) {
-
-    m_speed = speed;
-    m_drivetrain = drivetrain;
-    m_angle = angle;
-
-
+  public DriveManuallyArcade(DoubleSupplier straightSpeed, DoubleSupplier turnSpeed, Drivetrain subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+
+    m_straightSpeed = straightSpeed;
+    m_turnSpeed = turnSpeed;
+
+    m_drivetrain = subsystem;
+
     addRequirements(m_drivetrain);
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-     m_drivetrain.calibrategyro();
-     m_drivetrain.resetGyro();
-
+    m_drivetrain.stopDrive();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_drivetrain.arcadeDrive(m_straightSpeed.getAsDouble() * 0.5, m_turnSpeed.getAsDouble() * 0.5, true);
 
-    m_drivetrain.tankDrive(m_speed * Math.signum(m_angle), m_speed * Math.signum(m_angle) * -1, false);
+    m_currentSpeed = m_drivetrain.getAverageVelocity();
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_currentSpeed = 0;
     m_drivetrain.stopDrive();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    m_drivetrain.resetGyro();
-
-    return Math.abs(m_drivetrain.getRobotAngle()) >= Math.abs(m_angle);
+    return false;
   }
 }
