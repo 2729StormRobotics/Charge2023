@@ -64,7 +64,7 @@ public class RobotContainer {
       new ChangeArmAngle(arm, 90));
 
     new JoystickButton(m_operator, Button.kB.value).whileTrue(
-      new ChangeArmAngle(arm, 90));
+      new ChangeArmAngle(arm, 0));
 
   }
 

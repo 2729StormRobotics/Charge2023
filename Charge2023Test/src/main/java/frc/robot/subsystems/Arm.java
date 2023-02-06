@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,6 +25,9 @@ public class Arm extends SubsystemBase {
   // private AnalogPotentiometer stringPot;
   private RelativeEncoder angleEncoder;
 
+  private double[] angleMotorPID;
+  private double[] extensionMotorPID;
+
   /** Creates a new Arm 💪 */
   public Arm() {
 
@@ -35,6 +39,9 @@ public class Arm extends SubsystemBase {
 
     follow = new CANSparkMax(2, MotorType.kBrushless);
     follow.follow(angleMotor);
+
+    angleMotorPID = new double[3];
+    extensionMotorPID = new double[3];
 
     // AnalogInput input = new AnalogInput(kStringPotPort);
 
@@ -71,6 +78,15 @@ public class Arm extends SubsystemBase {
     return extensionEncoder.getPosition() / kMaxExtensionLengthInEncoderTicks * kMaxExtensionLength;
   }
 
+  public double[] getAnglePID() {
+    return angleMotorPID;
+  }
+
+  public double[] getExtensionPID() {
+    return extensionMotorPID;
+  }
+
+
   public void resetEncoders() {
     // reset the angleMotor's encoder
     angleEncoder.setPosition(0);
@@ -82,6 +98,16 @@ public class Arm extends SubsystemBase {
     SmartDashboard.putNumber("Arm Angle (deg)", getArmAngle());
     // SmartDashboard.putNumber("String Pot Distance", getStringPotDistance());
     SmartDashboard.putNumber("Distance Extended (in)", getExtendedDistance());
+
+
+    angleMotorPID[0] = SmartDashboard.getNumber("Angle kP", 0.0);
+    angleMotorPID[1] = SmartDashboard.getNumber("Angle kI", 0.0);
+    angleMotorPID[2] = SmartDashboard.getNumber("Angle kD", 0.0);
+
+    extensionMotorPID[0] = SmartDashboard.getNumber("Extension kP", 0.0);
+    extensionMotorPID[1] = SmartDashboard.getNumber("Extension kI", 0.0);
+    extensionMotorPID[2] = SmartDashboard.getNumber("Extension kD", 0.0);
+
 
   }
 }
