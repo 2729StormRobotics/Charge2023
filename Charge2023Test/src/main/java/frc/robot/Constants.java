@@ -267,15 +267,10 @@ public final class Constants {
         public static final double highConeAngle = 0;
         public static final double midCubeAngle = 0;
         public static final double highCubeAngle = 0;
-        public static final double lowExtensionDistance = 0;
-        public static final double midExtensionDistance = 0;
-        public static final double highExtensionDistance = 0;
         // shelf constants
         public static final double shelfAngle = 0;
-        public static final double shelfExtensionDistance = 0;
         // charge station constants
         public static final double chargingAngle = 0;
-        public static final double chargingExtensionDistance = 0;
     }
 
 

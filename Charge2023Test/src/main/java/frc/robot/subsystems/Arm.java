@@ -18,7 +18,6 @@ import static frc.robot.Constants.ArmConstants.*;
 
 public class Arm extends SubsystemBase {
 
-  private CANSparkMax extensionMotor;
   private RelativeEncoder extensionEncoder;
   private CANSparkMax angleMotor;
   private CANSparkMax follow;
@@ -26,13 +25,12 @@ public class Arm extends SubsystemBase {
   private RelativeEncoder angleEncoder;
 
   private double[] angleMotorPID;
-  private double[] extensionMotorPID;
+
 
   /** Creates a new Arm 💪 */
   public Arm() {
 
-    extensionMotor = new CANSparkMax(kExtensionMotorPort, MotorType.kBrushless);
-    extensionEncoder = extensionMotor.getEncoder();
+   
 
     angleMotor = new CANSparkMax(kAngleMotorPort, MotorType.kBrushless);
     angleEncoder = angleMotor.getEncoder();
@@ -41,7 +39,7 @@ public class Arm extends SubsystemBase {
     follow.follow(angleMotor);
 
     angleMotorPID = new double[3];
-    extensionMotorPID = new double[3];
+    
 
     // AnalogInput input = new AnalogInput(kStringPotPort);
 
@@ -52,10 +50,6 @@ public class Arm extends SubsystemBase {
 
   }
   
-  public void setExtensionMotorSpeed(double speed) {
-    // run the motor that extends the arm
-    extensionMotor.set(speed);
-  }
 
   public void setAngleMotorSpeed(double speed) {
     // run the motor that changes the angle of the arm
@@ -82,9 +76,6 @@ public class Arm extends SubsystemBase {
     return angleMotorPID;
   }
 
-  public double[] getExtensionPID() {
-    return extensionMotorPID;
-  }
 
 
   public void resetEncoders() {
@@ -103,10 +94,6 @@ public class Arm extends SubsystemBase {
     angleMotorPID[0] = SmartDashboard.getNumber("Angle kP", 0.0);
     angleMotorPID[1] = SmartDashboard.getNumber("Angle kI", 0.0);
     angleMotorPID[2] = SmartDashboard.getNumber("Angle kD", 0.0);
-
-    extensionMotorPID[0] = SmartDashboard.getNumber("Extension kP", 0.0);
-    extensionMotorPID[1] = SmartDashboard.getNumber("Extension kI", 0.0);
-    extensionMotorPID[2] = SmartDashboard.getNumber("Extension kD", 0.0);
 
 
   }

@@ -7,7 +7,6 @@ package frc.robot.commandgroups;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.ChangeArmAngle;
 import frc.robot.commands.PointTurnGyroTank;
-import frc.robot.commands.TelescopeToDistance;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import static frc.robot.Constants.ArmConstants.*;
@@ -17,21 +16,21 @@ import static frc.robot.Constants.DriveConstants.kTurnSpeed;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 
-// This command group positions the arm to the mid level of the grid in the right position.
+// This command group positions the arm to the high level of the grid in the mid position. 
 
-public class GridMidRight extends ParallelCommandGroup {
+public class GridConeMid extends ParallelCommandGroup {
 
   private final Arm m_arm;
   private final Drivetrain m_drivetrain;
 
   /** Creates a new gridHighLeft. */
-  public GridMidRight(Arm arm, Drivetrain drivetrain) {
+  public GridConeMid(Arm arm, Drivetrain drivetrain) {
 
     m_arm = arm;
     m_drivetrain = drivetrain;
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new PointTurnGyroTank(kTurnSpeed, rightHorizontalShift, m_drivetrain), new ChangeArmAngle(m_arm, midConeAngle), new TelescopeToDistance(m_arm, midExtensionDistance)); 
+    addCommands(new PointTurnGyroTank(kTurnSpeed, midHorizontalShift, m_drivetrain), new ChangeArmAngle(m_arm, highCubeAngle));
   }
 }
