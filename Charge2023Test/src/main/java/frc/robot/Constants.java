@@ -3,19 +3,9 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.I2C.Port;
-
-
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants. This class should not be used for any other purpose. All constants should be declared
- * globally (i.e. public static). Do not put anything functional in this class.
- *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
- */
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -33,31 +23,44 @@ public final class Constants {
 
     public static final int kPneumaticsHubCanId = 7;
 
-    public static final class ClawConstants {
+    public static final class HangerConstants {
+        // These are all temporary fill-in values
 
-        public static final int kLeftRollerMotorPort = 0;
-        public static final int kRightRollerMotorPort = 0;
-        public static final double kLeftRollerMotorSpeed = 0;
-        public static final double kRightRollerMotorSpeed = 0;
-        public static final double kRollerMotorStopSpeed = 0;
-        public static final double kStopSpeed = 0;
+        // Gearing for calculations, given in output turns per motor turn
+        private static final double kGearing = 0.0;
+        // Diameter of the pulley in inches
+        private static final double kPulleyDiameter = 0.0;
+        // Circumference of the pulley in inches
+        public static final double kPulleyCircumference = Math.PI * kPulleyDiameter;
 
+        // Distance per rotation determined by multiplying pulley circumference by the gearing
+        public static final double kDistancePerRotation = kPulleyCircumference * kGearing;
+        // Speed per rotation determined by dividing distance per rotation by 60 seconds
+        public static final double kSpeedPerRotation = kDistancePerRotation / 60;
 
-        public static final int kColorSensorPort = 0;
-        public static final int kBeamBreakPort = 0;
+        // Port numbers for hanger motors
+        public static final int kHangerMotorLeftPort = 1;
+        public static final int kHangerMotorRightPort = 4;
 
+        // Constant speed at which the hanger motor will rotate to extend the elevator
+        public static final double kClimbSpeed = 0.2; //This value is a guess
+        // The maximum extension of the elevator
+        public static final double kMaxHeight = 0.0;
 
-        public static final int kLeftPistonExtendChannel = 0;
-        public static final int kLeftPistonRetractChannel = 0;
-        public static final Value kLeftPistonExtendValue = Value.kForward;
-        public static final Value kLeftPistonRetractValue = Value.kReverse;
+        // Port numberfor the pawl piston
+        public static final int kPawlPistonChannel = 0;
+        // Booleans for when the piston is enabled or disabled to make the code more readable
+        public static final boolean kPawlPistonEnabled = false;
+        public static final boolean kPawlPistonDisabled = true;
 
-        public static final int kRightPistonExtendChannel = 0;
-        public static final int kRightPistonRetractChannel = 0;
-        public static final Value kRightPistonExtendValue = Value.kForward;
-        public static final Value kRightPistonRetractValue = Value.kReverse;
     }
 
+
+
+
+
+
+    
     public static final class VisionConstants{
         public static final double klimelightHeight = 0;
         public static final double klimelightAngle = 0;
@@ -82,17 +85,17 @@ public final class Constants {
 
         // Drive Motor Ports
 
-        public static final int kLeftLeaderMotorPort = 9;
-        public static final int kLeftFollowerMotorPort = 6;
-        public static final int kRightLeaderMotorPort = 2;
+        public static final int kLeftLeaderMotorPort = 8;
+        public static final int kLeftFollowerMotorPort = 2;
+        public static final int kRightLeaderMotorPort = 6;
         public static final int kRightFollowerMotorPort = 3;
 
 
         // Set If Drive Motors are Reversed
-        public static final boolean kLeftLeaderMotorReversedDefault = false;
-        public static final boolean kLeftFollowerMotorReversedDefault = false;
-        public static final boolean kRightLeaderMotorReversedDefault = true;
-        public static final boolean kRightFollowerMotorReversedDefault = true;
+        public static final boolean kLeftLeaderMotorReversedDefault = true;
+        public static final boolean kLeftFollowerMotorReversedDefault = true;
+        public static final boolean kRightLeaderMotorReversedDefault = false;
+        public static final boolean kRightFollowerMotorReversedDefault = false;
 
         public static final int kCurrentLimit = 0; // NEED TO SET
 
@@ -155,38 +158,6 @@ public final class Constants {
     public static final class ButtonBindingConstants {
         public static final int kDriverControllerPort = 0;
         public static final int kOperatorControllerPort = 1;
-    }
-
-    public static final class ArmConstants {
-        // need all port nums
-        public static final int kExtensionMotorPort = -1;
-        public static final int kAngleMotorPort = -1;
-        public static final int kStringPotPort = -1;
-
-        // CHANGE kMaxExtensionLengthInEncoderTicks!
-        public static final double kMaxExtensionLengthInEncoderTicks = 5.0;
-        public static final double kMaxExtensionLength = 63.75; // inches
-        // tbd
-        public static final double kAngleMotorSpeed = .5;
-        public static final double kExtensionMotorSpeed = .5;
-        // grid constants
-        public static final double leftHorizontalShift = 0;
-        public static final double midHorizontalShift = 0;
-        public static final double rightHorizontalShift = 0;
-        public static final double lowAngle = 0;
-        public static final double midConeAngle = 0;
-        public static final double highConeAngle = 0;
-        public static final double midCubeAngle = 0;
-        public static final double highCubeAngle = 0;
-        public static final double lowExtensionDistance = 0;
-        public static final double midExtensionDistance = 0;
-        public static final double highExtensionDistance = 0;
-        // shelf constants
-        public static final double shelfAngle = 0;
-        public static final double shelfExtensionDistance = 0;
-        // charge station constants
-        public static final double chargingAngle = 0;
-        public static final double chargingExtensionDistance = 0;
     }
 
 
