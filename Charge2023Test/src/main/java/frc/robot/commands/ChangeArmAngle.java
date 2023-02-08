@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
+import static frc.robot.Constants.ArmConstants.*;
 
 public class ChangeArmAngle extends CommandBase {
 
@@ -38,9 +39,8 @@ public class ChangeArmAngle extends CommandBase {
   public void execute() {
     // run the motor at a positive speed to rotate the arm upward, and negative to rotate downward
     // if else in one line
-    // pid.calculate(encoder.getDistance(), setpoint)
-    m_Arm.setAngleMotorSpeed(pid.calculate(m_Arm.getArmAngle(), finalAngle) * (finalAngle > 0 ? 1 : -1));
-
+    // m_Arm.setAngleMotorSpeed(pid.calculate(m_Arm.getArmAngle(), finalAngle) * (finalAngle > 0 ? 1 : -1));
+    m_Arm.setAngleMotorSpeed(kAngleMotorSpeed);
   }
 
   // Called once the command ends or is interrupted.

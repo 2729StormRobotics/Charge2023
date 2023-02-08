@@ -69,9 +69,9 @@ public class Arm extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Arm Angle (deg)", getArmAngle());
 
-    angleMotorPID[0] = SmartDashboard.getNumber("Angle kP", 0.0);
-    angleMotorPID[1] = SmartDashboard.getNumber("Angle kI", 0.0);
-    angleMotorPID[2] = SmartDashboard.getNumber("Angle kD", 0.0);
+    angleMotorPID[0] = SmartDashboard.getNumber("Arm Angle PID", 0.0);
+    angleMotorPID[1] = SmartDashboard.getNumber("Arm Angle PID", 0.0);
+    angleMotorPID[2] = SmartDashboard.getNumber("Arm Angle PID", 0.0);
 
 
   }
