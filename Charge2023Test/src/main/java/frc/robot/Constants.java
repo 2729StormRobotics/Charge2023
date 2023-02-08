@@ -254,7 +254,8 @@ public final class Constants {
 
         // CHANGE kMaxExtensionLengthInEncoderTicks!
         public static final double kMaxExtensionLengthInEncoderTicks = 5.0;
-        public static final double kMaxExtensionLength = 63.75; // inches
+        // CHANGE THIS!!!
+        public static final double kArmLength = 20.0; // inches
         // tbd
         public static final double kAngleMotorSpeed = .25;
         public static final double kExtensionMotorSpeed = .05;

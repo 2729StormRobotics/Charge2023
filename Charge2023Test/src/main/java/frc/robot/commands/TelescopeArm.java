@@ -44,19 +44,13 @@ public class TelescopeArm extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
     m_Arm.setAngleMotorSpeed(0);
-
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // stop this command when the arm is fully extended or fully retracted
-    // return (m_Arm.getStringPotDistance() >= kMaxExtensionLength || m_Arm.getStringPotDistance() <= 0);
-
-    return (m_Arm.getExtendedDistance() >= kMaxExtensionLength || m_Arm.getExtendedDistance() <= 0);
-
+    return true;
   }
 
 }
