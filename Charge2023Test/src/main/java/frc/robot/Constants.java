@@ -123,15 +123,17 @@ public final class Constants {
     public static final class ArmConstants {
         // need all port nums
         public static final int kExtensionMotorPort = 9;
-        public static final int kAngleMotorPort = 2;
+        public static final int kAngleMotorPort = 8;
         // public static final int 
 
+        // Arm Angle Tolerance
+        public static final double kArmAngleTolerance = .1;
         // CHANGE kMaxExtensionLengthInEncoderTicks!
         public static final double kMaxExtensionLengthInEncoderTicks = 5.0;
         // CHANGE THIS!!!
         public static final double kArmLength = 20.0; // inches
         // tbd
-        public static final double kAngleMotorSpeed = .25;
+        public static final double kAngleMotorSpeed = .05;
         public static final double kExtensionMotorSpeed = .05;
         // grid constants
         public static final double leftHorizontalShift = 0;

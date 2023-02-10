@@ -39,8 +39,8 @@ public class ChangeArmAngle extends CommandBase {
   public void execute() {
     // run the motor at a positive speed to rotate the arm upward, and negative to rotate downward
     // if else in one line
-    // m_Arm.setAngleMotorSpeed(pid.calculate(m_Arm.getArmAngle(), finalAngle) * (finalAngle > 0 ? 1 : -1));
-    m_Arm.setAngleMotorSpeed(kAngleMotorSpeed);
+    m_Arm.setAngleMotorSpeed(pid.calculate(m_Arm.getArmAngle(), finalAngle));
+    // m_Arm.setAngleMotorSpeed((m_Arm.getArmAngle() > finalAngle) ? -kAngleMotorSpeed : kAngleMotorSpeed);
   }
 
   // Called once the command ends or is interrupted.
@@ -55,6 +55,6 @@ public class ChangeArmAngle extends CommandBase {
   public boolean isFinished() {
     // stop the motor after reaching the desired angle
     // return false;
-    return (Math.abs(m_Arm.getArmAngle()) >= Math.abs(finalAngle));
+    return (Math.abs(m_Arm.getArmAngle() - finalAngle) <= kArmAngleTolerance);
   }
 }

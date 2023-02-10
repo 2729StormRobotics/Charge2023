@@ -54,11 +54,17 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
 
-    new JoystickButton(m_operator, Button.kA.value).whileTrue(
-      new ChangeArmAngle(arm, 90));
-
     new JoystickButton(m_operator, Button.kB.value).whileTrue(
-      new ChangeArmAngle(arm, 0));
+        new ChangeArmAngle(arm, 0));
+
+    new JoystickButton(m_operator, Button.kY.value).whileTrue(
+        new ChangeArmAngle(arm, 90));
+
+    new JoystickButton(m_operator, Button.kX.value).whileTrue(
+        new ChangeArmAngle(arm, 180));
+
+    new JoystickButton(m_operator, Button.kA.value).whileTrue(
+        new ChangeArmAngle(arm, 270));
 
   }
 
