@@ -3,19 +3,9 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.I2C.Port;
-
-
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants. This class should not be used for any other purpose. All constants should be declared
- * globally (i.e. public static). Do not put anything functional in this class.
- *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
- */
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -82,9 +72,9 @@ public final class Constants {
 
         // Drive Motor Ports
 
-        public static final int kLeftLeaderMotorPort = 9;
-        public static final int kLeftFollowerMotorPort = 6;
-        public static final int kRightLeaderMotorPort = 2;
+        public static final int kLeftLeaderMotorPort = 8;
+        public static final int kLeftFollowerMotorPort = 2;
+        public static final int kRightLeaderMotorPort = 6;
         public static final int kRightFollowerMotorPort = 3;
 
 
@@ -159,16 +149,19 @@ public final class Constants {
 
     public static final class ArmConstants {
         // need all port nums
-        public static final int kExtensionMotorPort = -1;
-        public static final int kAngleMotorPort = -1;
-        public static final int kStringPotPort = -1;
+        public static final int kExtensionMotorPort = 9;
+        public static final int kAngleMotorPort = 8;
+        // public static final int 
 
+        // Arm Angle Tolerance
+        public static final double kArmAngleTolerance = .1;
         // CHANGE kMaxExtensionLengthInEncoderTicks!
         public static final double kMaxExtensionLengthInEncoderTicks = 5.0;
-        public static final double kMaxExtensionLength = 63.75; // inches
+        // CHANGE THIS!!!
+        public static final double kArmLength = 20.0; // inches
         // tbd
-        public static final double kAngleMotorSpeed = .5;
-        public static final double kExtensionMotorSpeed = .5;
+        public static final double kAngleMotorSpeed = .05;
+        public static final double kExtensionMotorSpeed = .05;
         // grid constants
         public static final double leftHorizontalShift = 0;
         public static final double midHorizontalShift = 0;
@@ -178,15 +171,10 @@ public final class Constants {
         public static final double highConeAngle = 0;
         public static final double midCubeAngle = 0;
         public static final double highCubeAngle = 0;
-        public static final double lowExtensionDistance = 0;
-        public static final double midExtensionDistance = 0;
-        public static final double highExtensionDistance = 0;
         // shelf constants
         public static final double shelfAngle = 0;
-        public static final double shelfExtensionDistance = 0;
         // charge station constants
         public static final double chargingAngle = 0;
-        public static final double chargingExtensionDistance = 0;
     }
 
 
