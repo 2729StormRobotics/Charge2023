@@ -5,23 +5,18 @@
 package frc.robot.commandgroups;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.VisionDriveToPointOfInterest;
-import frc.robot.commands.VisionPointToPointOfInference;
+import frc.robot.commands.PointTurnGyroPID;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Vision;
+
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-// Gets robot to point of interest
-public class VisionMoveToPointOfInterest extends SequentialCommandGroup {
-  /** Creates a new VisionMoveToPointOfInterest. */
-  public VisionMoveToPointOfInterest(Vision vision, Drivetrain drivetrain) {
+public class PIDPointturn extends SequentialCommandGroup {
+  /** Creates a new PIDPointturn. */
+  public PIDPointturn(Drivetrain drivetrain) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new VisionPointToPointOfInference(vision, drivetrain),
-      new VisionDriveToPointOfInterest(vision, drivetrain)
-    );
+    addCommands(new PointTurnGyroPID(90, drivetrain));
   }
 }

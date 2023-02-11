@@ -4,21 +4,25 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 import static frc.robot.Constants.ArmConstants.*;
 
-public class TelescopeToDistance extends CommandBase {
+public class ChangeArmAngle extends CommandBase {
 
   private Arm m_Arm;
+  private PIDController pid;
 
-  private double distance;
+  private double finalAngle;
 
-  /** Creates a new TelescopeToDistance. */
-  public TelescopeToDistance(Arm subsystem, double dist) {
+  /** Creates a new ChangeArmAngle. */
+  public ChangeArmAngle(Arm subsystem, double degree) {
 
     m_Arm = subsystem;
-    distance = dist;
+    pid = new PIDController(m_Arm.getAnglePID()[0], m_Arm.getAnglePID()[1], m_Arm.getAnglePID()[2]);
+
+    finalAngle = degree;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements();
@@ -28,23 +32,20 @@ public class TelescopeToDistance extends CommandBase {
   @Override
   public void initialize() {
 
-    m_Arm.setAngleMotorSpeed(0);
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // if extend is true, run the motor at a positive speed to extend the arm
-    // if extend is false, run the motor at a negative speed to retract the arm
-    m_Arm.setAngleMotorSpeed((distance > m_Arm.getExtendedDistance() ? kAngleMotorSpeed : -kAngleMotorSpeed));
-
+    // run the motor at a positive speed to rotate the arm upward, and negative to rotate downward
+    // if else in one line
+    m_Arm.setAngleMotorSpeed(pid.calculate(m_Arm.getArmAngle(), finalAngle));
+    // m_Arm.setAngleMotorSpeed((m_Arm.getArmAngle() > finalAngle) ? -kAngleMotorSpeed : kAngleMotorSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
     m_Arm.setAngleMotorSpeed(0);
 
   }
@@ -52,18 +53,8 @@ public class TelescopeToDistance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // stop this command when the arm is fully extended or fully retracted or when the target distance is reached
-    
-    if (m_Arm.getExtendedDistance() >= kMaxExtensionLength) {
-      return false;
-    } else if (m_Arm.getExtendedDistance() <= 0) {
-      return false;
-    } else if (m_Arm.getExtendedDistance() >= distance) {
-      return false;
-    }
-    
-    return true;
-
+    // stop the motor after reaching the desired angle
+    // return false;
+    return (Math.abs(m_Arm.getArmAngle() - finalAngle) <= kArmAngleTolerance);
   }
-
 }

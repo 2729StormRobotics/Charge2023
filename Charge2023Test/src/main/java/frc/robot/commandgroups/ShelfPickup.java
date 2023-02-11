@@ -6,7 +6,6 @@ package frc.robot.commandgroups;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.ChangeArmAngle;
-import frc.robot.commands.TelescopeToDistance;
 import frc.robot.subsystems.Arm;
 import static frc.robot.Constants.ArmConstants.*;
 
@@ -29,6 +28,6 @@ public class ShelfPickup extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
 
 
-    addCommands(new ChangeArmAngle(m_arm, shelfAngle), new TelescopeToDistance(m_arm, shelfExtensionDistance)); 
+    addCommands(new ChangeArmAngle(m_arm, shelfAngle)); 
   }
 }
