@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class Arm extends SubsystemBase {
   
   private CANSparkMax angleMotor;
-  private CANSparkMax follow;
+  private CANSparkMax angleMotorFollower;
   private RelativeEncoder angleEncoder;
 
   private double[] angleMotorPID;
@@ -32,10 +32,10 @@ public class Arm extends SubsystemBase {
     angleMotor = new CANSparkMax(kAngleMotorPort, MotorType.kBrushless);
     angleEncoder = angleMotor.getEncoder();
 
-    follow = new CANSparkMax(2, MotorType.kBrushless);
-    follow.follow(angleMotor);
+    angleMotorFollower = new CANSparkMax(kAngleMotorFollowerPort, MotorType.kBrushless);
+    angleMotorFollower.follow(angleMotor);
 
-    angleMotorPID = new double[]{0.00425,0.0,0.0}; 
+    angleMotorPID = new double[]{kP,kI,kD}; 
 
     resetEncoders();
   }
