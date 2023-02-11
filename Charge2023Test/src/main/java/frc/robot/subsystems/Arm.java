@@ -35,7 +35,7 @@ public class Arm extends SubsystemBase {
     follow = new CANSparkMax(2, MotorType.kBrushless);
     follow.follow(angleMotor);
 
-    angleMotorPID = new double[]{0.004,0.0,0.0}; 
+    angleMotorPID = new double[]{0.00425,0.0,0.0}; 
 
     resetEncoders();
   }

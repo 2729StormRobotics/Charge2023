@@ -21,7 +21,7 @@ public class ChangeArmAngle extends CommandBase {
 
     m_Arm = subsystem;
     pid = new PIDController(m_Arm.getAnglePID()[0], m_Arm.getAnglePID()[1], m_Arm.getAnglePID()[2]);
-
+    
     finalAngle = degree;
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -31,7 +31,7 @@ public class ChangeArmAngle extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    pid.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,7 +39,13 @@ public class ChangeArmAngle extends CommandBase {
   public void execute() {
     // run the motor at a positive speed to rotate the arm upward, and negative to rotate downward
     // if else in one line
-    m_Arm.setAngleMotorSpeed(pid.calculate(m_Arm.getArmAngle(), finalAngle));
+    double pidOut = pid.calculate(m_Arm.getArmAngle(), finalAngle);
+    if (pidOut > .2) {
+      pidOut = .2;
+    } else if (pidOut < -.2) {
+      pidOut = -.2;
+    }
+    m_Arm.setAngleMotorSpeed(pidOut);
     // m_Arm.setAngleMotorSpeed((m_Arm.getArmAngle() > finalAngle) ? -kAngleMotorSpeed : kAngleMotorSpeed);
   }
 
