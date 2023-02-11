@@ -26,7 +26,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
@@ -90,6 +89,9 @@ public class Drivetrain extends SubsystemBase {
     encoderInit();
     resetAllEncoders();
 
+
+
+
     m_drive = new DifferentialDrive(m_leftLeaderMotor, m_rightLeaderMotor);
 
     // Set The Feedforward Values
@@ -113,14 +115,15 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // SmartDashboard.putNumber("left drive encoder", m_leftEncoder.getPosition());
-    // SmartDashboard.putNumber("right drive encoder", m_rightEncoder.getPosition());
-
-    // SmartDashboard.putNumber("average distance", getAverageDistance());
+     SmartDashboard.putNumber("left drive encoder", m_leftEncoder.getPosition());
+     SmartDashboard.putNumber("right drive encoder", m_rightEncoder.getPosition());
+     SmartDashboard.putNumber("average distance", getAverageDistance());
     // m_imu.setYawAxis(IMUAxis())
     // * 70 / 360 to convert the Gyro's 'units'
     SmartDashboard.putNumber("GyroYaw", getRobotAngle());
-    SmartDashboard.putNumber("GyroRoll", m_imu.getXComplementaryAngle() );
+
+    SmartDashboard.putNumber("GyroRoll", m_imu.getXComplementaryAngle() - 3.14);
+  
   }
 
   // Initializes Motors by Setting Defaults
@@ -177,9 +180,9 @@ public class Drivetrain extends SubsystemBase {
  encoderInit();
   //printPositionConversionFactor();   
    
-  System.out.println("Left:  " + distLeft);
-   System.out.println("Right:  " + distRight);
-    System.out.println("velocity:  " + getAverageVelocity());
+  //System.out.println("Left:  " + distLeft);
+  // System.out.println("Right:  " + distRight);
+  //  System.out.println("velocity:  " + getAverageVelocity());
      
    return (distLeft + distRight) / 2;
 
@@ -187,8 +190,8 @@ public class Drivetrain extends SubsystemBase {
 
   // // feedback of encoder conversion factor on the Driver Station Console
  public void printPositionConversionFactor() {
-   System.out.println("Left Conversion Factor:  " + m_leftEncoder.getPositionConversionFactor());
-    System.out.println("Right Conversion Factor:  " + m_rightEncoder.getPositionConversionFactor());
+   //System.out.println("Left Conversion Factor:  " + m_leftEncoder.getPositionConversionFactor());
+   // System.out.println("Right Conversion Factor:  " + m_rightEncoder.getPositionConversionFactor());
    }
 
   // // Get the velocity of the left encoder
@@ -233,6 +236,12 @@ public class Drivetrain extends SubsystemBase {
 
   public double getRobotAngle(){
     return m_imu.getAngle();
+  }
+
+
+  public double getRollangle(){
+    return (m_imu.getXComplementaryAngle() * -1 );
+
   }
 
 }
