@@ -24,9 +24,7 @@ public class DriveBackwardsAndBalance extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     //addCommands(new PointTurnGyroTank(0.1, 90, drivetrain));
     
-    //addCommands(new DriveDistance(drivetrain, -0.3, 50));
-
-
-    addCommands(new PIDbalancechargestation(drivetrain));
+    addCommands(new DriveDistance(drivetrain, -0.3, 50));
+    addCommands(new PIDbalancechargestation(0, 0, drivetrain));
   }
 }

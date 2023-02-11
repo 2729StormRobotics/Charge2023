@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
 
-
-
 public class PointTurnGyroTank extends CommandBase {
 
   private final Drivetrain m_drivetrain;
@@ -34,6 +32,7 @@ public class PointTurnGyroTank extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+     m_drivetrain.calibrategyro();
      m_drivetrain.resetGyro();
 
   }
@@ -54,7 +53,8 @@ public class PointTurnGyroTank extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    
+    m_drivetrain.resetGyro();
+
     return Math.abs(m_drivetrain.getRobotAngle()) >= Math.abs(m_angle);
   }
 }
