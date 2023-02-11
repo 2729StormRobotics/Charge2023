@@ -4,26 +4,16 @@
 
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.math.controller.PIDController;
 import frc.robot.subsystems.Drivetrain.*;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.commands.DriveDistance.*;
 import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class PIDbalancechargestation extends CommandBase {
+public class upanddowngyro extends CommandBase {
   
   public double power = 0.2;
   private final Drivetrain m_drivetrain;
-
-
-  //sets the PID values
-private static final double kP = 0.02; 
-private static final double kI = 0.00; 
-private static final double kD = 0.001; 
-
-
-private final PIDController m_pidController = new PIDController(kP, kI, kD);
 
   private final double m_speed;
 
@@ -31,7 +21,7 @@ private final PIDController m_pidController = new PIDController(kP, kI, kD);
   private static int climbing = 0;
 
   /** Creates a new upanddowngyro. */
-  public PIDbalancechargestation(double speed, double rollangle, Drivetrain drivetrain) {
+  public upanddowngyro(double speed, double rollangle, Drivetrain drivetrain) {
     m_speed = speed;
     m_drivetrain = drivetrain;
     m_angle = m_drivetrain.getRollangle();
@@ -45,28 +35,47 @@ private final PIDController m_pidController = new PIDController(kP, kI, kD);
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-   m_drivetrain.calibrategyro();
-   //int anglefirst = m_drivetrain.getRollangle();
-   m_drivetrain.resetGyro();
-    
+    m_drivetrain.calibrategyro();
+    m_drivetrain.resetGyro();
     climbing = 0;
     power = 0;
-    m_pidController.setSetpoint(2.9);
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_drivetrain.tankDrive(power, power, false);
    
-   double pidOut = m_pidController.calculate(m_drivetrain.getRollangle());
+    if (climbing == 0) {
+      power = 0.2;
+        if (m_drivetrain.getRollangle() < -11) {
+       
+          climbing = 1; 
+          power = 0.1;
+      }
+    }
+    if (climbing == 1 && m_drivetrain.getRollangle() > 0) {
+      climbing = 2;
+      power = -.07;
+    }
+    // if (climbing == 2 && m_drivetrain.getRollangle() >= 0) {
+    //   climbing = 3;
+    //   power = -.07;
+    // }
+    if (climbing == 2 && Math.abs(m_drivetrain.getRollangle()) >= 2.5) {
+      climbing = 3;
+      power = .07;
+    }
 
-   if (pidOut < -.1) pidOut = -.1;
-   
-   if (pidOut > .1) pidOut = .1;
-   
-    m_drivetrain.tankDrive(pidOut, pidOut, false);
- 
+    if (climbing == 3 && Math.abs(m_drivetrain.getRollangle()) <= 2.5) {
+       climbing = 4;
+       power = 0;
+     }
+
+    // if (climbing >= 2) {
+
+    //     power = -.05;
       }
 
 
@@ -84,13 +93,13 @@ private final PIDController m_pidController = new PIDController(kP, kI, kD);
     @Override
     public boolean isFinished() {
       
-   return false;
+   
 
-  // if (Math.abs(m_drivetrain.getRollangle()) <= 1) {
-  //     return true; 
-  // } else { 
-  //       return false;
-  // }
+  if (climbing == 5 && Math.abs(m_drivetrain.getRollangle()) <= 2.5) {
+      return true; 
+  } else { 
+        return false;
+  }
   }  
 }
 
