@@ -21,7 +21,34 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  */
 public final class Constants {
 
-    public static final class VisionConstants {
+    public static final int kPneumaticsHubCanId = 7;
+
+    public static final class ClawConstants {
+
+        public static final int kLeftRollerMotorPort = 0;
+        public static final int kRightRollerMotorPort = 0;
+        public static final double kLeftRollerMotorSpeed = 0;
+        public static final double kRightRollerMotorSpeed = 0;
+        public static final double kRollerMotorStopSpeed = 0;
+        public static final double kStopSpeed = 0;
+
+        public static final int kColorSensorPort = 0;
+        public static final int kBeamBreakPort = 0;
+
+
+        public static final int kLeftPistonExtendChannel = 0;
+        public static final int kLeftPistonRetractChannel = 0;
+        public static final Value kLeftPistonExtendValue = Value.kForward;
+        public static final Value kLeftPistonRetractValue = Value.kReverse;
+
+        public static final int kRightPistonExtendChannel = 0;
+        public static final int kRightPistonRetractChannel = 0;
+        public static final Value kRightPistonExtendValue = Value.kForward;
+        public static final Value kRightPistonRetractValue = Value.kReverse;
+    }
+
+
+    public static final class VisionConstants{
         public static final double klimelightHeight = 0;
         public static final double klimelightAngle = 0;
 
