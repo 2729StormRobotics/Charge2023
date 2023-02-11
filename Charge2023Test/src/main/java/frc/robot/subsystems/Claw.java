@@ -65,11 +65,11 @@ public boolean hasPieceV2() {
     m_rightRollerMotor.set(kRollerMotorStopSpeed);
   } 
 
- 
+
 }
 
 public void haltMotors(double kRollerMotorStopSpeed) {
-  
+
     m_leftRollerMotor.set(0);
     m_rightRollerMotor.set(0);
 }
@@ -91,7 +91,7 @@ public void retractRightPiston() {
 public void extendLeftPiston () {
   m_leftPiston.set(kLeftPistonExtendValue);
   }
-  
+
   public void retractLeftPiston() {
     m_leftPiston.set(kLeftPistonRetractValue);
   }

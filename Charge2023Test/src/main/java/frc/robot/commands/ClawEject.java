@@ -17,7 +17,7 @@ public class ClawEject extends CommandBase {
     m_claw = subsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
-  
+
   addRequirements(m_claw);
   }
 
@@ -29,7 +29,7 @@ public class ClawEject extends CommandBase {
   @Override
   public void execute() {
     m_claw.ejectRollerMotors(kshootSpeed);
-    
+
   }
 
   // Called once the command ends or is interrupted.

@@ -17,7 +17,7 @@ public class ClawPickup extends CommandBase {
     m_claw = subsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
-  
+
   addRequirements(m_claw);
   }
 
