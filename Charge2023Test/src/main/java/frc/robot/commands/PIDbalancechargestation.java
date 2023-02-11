@@ -41,12 +41,13 @@ private final PIDController m_pidController = new PIDController(kP, kI, kD);
   @Override
   public void initialize() {
     m_drivetrain.calibrategyro();
-   double anglefirst = m_drivetrain.getRollangle();
-  // m_drivetrain.resetGyro();
+
+   double desiredendangle = -3.7; //angle of gyro at the flat surface
+   m_drivetrain.resetGyro();
     
     climbing = 0;
     power = 0;
-    m_pidController.setSetpoint(0);
+    m_pidController.setSetpoint(desiredendangle);
 
   }
 
@@ -56,14 +57,18 @@ private final PIDController m_pidController = new PIDController(kP, kI, kD);
    
    double pidOut = m_pidController.calculate(m_drivetrain.getRollangle());
 
-   
+//10 deg = -0.1
+//-10 deg = 0.1
+
+
+
    if (pidOut < -.1) pidOut = -.1;
    
    if (pidOut > .1) pidOut = .1;
    
    SmartDashboard.putNumber("Speed for Gyro balance", pidOut);
    
-    m_drivetrain.tankDrive(0, 0, false);
+    m_drivetrain.tankDrive(pidOut, pidOut, false);
  
       }
 

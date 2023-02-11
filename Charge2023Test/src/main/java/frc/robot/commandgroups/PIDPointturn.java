@@ -7,6 +7,7 @@ package frc.robot.commandgroups;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.PointTurnGyroPID;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.commands.PointurnPIDwithGyro;
 
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -17,6 +18,6 @@ public class PIDPointturn extends SequentialCommandGroup {
   public PIDPointturn(Drivetrain drivetrain) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new PointTurnGyroPID(90, drivetrain));
+    addCommands(new PointurnPIDwithGyro(90, drivetrain));
   }
 }

@@ -17,10 +17,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commandgroups.AutoDriveBackwards;
 import frc.robot.commandgroups.DriveBackwardsAndBalance;
+import frc.robot.commandgroups.PIDPointturn;
 import frc.robot.commands.DriveDistance;
 import frc.robot.commands.DriveManuallyArcade;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.commands.PointTurnGyroTank;
+import frc.robot.commandgroups.PIDPointturn;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -70,6 +72,7 @@ public class RobotContainer {
     SmartDashboard.putData("Autonomous Selector", m_autoChooser);
     //m_autoChooser.setDefaultOption("Do Nothing", new InstantCommand());
     m_autoChooser.setDefaultOption("DriveBackwardsAndBalance", new DriveBackwardsAndBalance(m_drivetrain));
+    m_autoChooser.addOption("PointTurn",new PIDPointturn(m_drivetrain));
    // m_autoChooser.addOption("Wall Shot", new AutoWallShot(m_shooter, m_index, m_drivetrain, m_intake, m_vision));
 
     m_drivetrain.setDefaultCommand(
