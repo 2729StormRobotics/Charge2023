@@ -58,6 +58,8 @@ public boolean hasPieceV2() {
   return !(m_rightRollerMotor.getOutputCurrent() > kCurrent);
 }
 
+//talk with DAF and see if we are using beambreak on claw or not. If not, we use hasPieceV2
+
  //stops both motors
  public void stopRollerMotors(double kRollerMotorStopSpeed) {
   if (hasPieceV2()== true) {
@@ -99,7 +101,7 @@ public void extendLeftPiston () {
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("Have Game Piece", hasPiece());
+    SmartDashboard.putBoolean("Have Game Piece", hasPieceV2());
     SmartDashboard.putNumber("Roller Current Output", m_rightRollerMotor.getOutputCurrent());
     // This method will be called once per scheduler run
   }
