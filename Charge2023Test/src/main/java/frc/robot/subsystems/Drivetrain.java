@@ -117,7 +117,8 @@ public class Drivetrain extends SubsystemBase {
     // * 70 / 360 to convert the Gyro's 'units'
     // 3.14 is to compensate for the battery and the floor, might have to change that at a later time
     SmartDashboard.putNumber("GyroYaw", getRobotAngle());
-    SmartDashboard.putNumber("GyroRoll", m_imu.getXComplementaryAngle() *-1);
+    SmartDashboard.putNumber("GyroRoll", getRollangle());
+    SmartDashboard.putNumber("GyroSide", m_imu.getYComplementaryAngle());
   
   }
 
@@ -226,7 +227,6 @@ public class Drivetrain extends SubsystemBase {
   }
   
   public void resetGyro(){
-  
     m_imu.reset();
   
   }
