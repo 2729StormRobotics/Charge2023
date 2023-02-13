@@ -5,9 +5,10 @@
 package frc.robot.commandgroups;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.PIDarcadepointturn;
 import frc.robot.commands.PointTurnGyroPID;
 import frc.robot.subsystems.Drivetrain;
-
+import frc.robot.commands.PIDarcadepointturn;
 
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -18,9 +19,11 @@ public class PIDPointturncommand extends SequentialCommandGroup {
   public PIDPointturncommand(Drivetrain drivetrain) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    int angle = 90;
-    addCommands(new PointTurnGyroPID(angle, drivetrain));
-    angle += 90;
+    // int angle = 90;
+     addCommands(new PIDarcadepointturn(drivetrain, 90) );
+
+    // angle += 90;
+    
  
   }
 

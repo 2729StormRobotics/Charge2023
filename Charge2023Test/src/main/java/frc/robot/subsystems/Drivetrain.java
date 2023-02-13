@@ -216,6 +216,7 @@ public class Drivetrain extends SubsystemBase {
   
   // Drives Using Arcade Drive
   public void arcadeDrive(double speed, double turn, boolean squareInputs){
+
     m_drive.arcadeDrive(speed, turn, squareInputs);
 
     // SmartDashboard.putNumber("forward power", speed);
@@ -235,6 +236,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public double getRobotAngle(){
+
     return m_imu.getAngle();
   }
 
