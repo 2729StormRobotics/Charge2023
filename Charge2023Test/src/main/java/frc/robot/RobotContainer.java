@@ -183,9 +183,9 @@ public class RobotContainer {
         // left d-pad button
       }
 
-//add vision button binding
+//add vision button binding (Either A,B, or X button Driver)
 
-//add dock and engage button binding
+//add dock and engage button binding (Y-Button Driver)
 
 
   /**
