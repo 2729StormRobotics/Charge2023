@@ -16,7 +16,7 @@ public class PIDarcadepointturn extends CommandBase {
 
 
   //sets the PID values
-private static final double kP = 0.05; 
+private static final double kP = 0.02; 
 private static final double kI = 0.00; 
 private static final double kD = 0.000; 
 
@@ -35,14 +35,16 @@ public PIDarcadepointturn(Drivetrain drivetrain, double angletoget) {
     m_pidController.setSetpoint(angletoget);
 
     addRequirements(m_drivetrain);
-    
+   // m_drivetrain.resetGyro();
+    m_drivetrain.calibrategyro();
   }
   
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     m_drivetrain.resetGyro();
-    m_drivetrain.calibrategyro();
+ //   m_drivetrain.calibrategyro();
+    m_pidController.setTolerance(1);
     
   }
   
@@ -54,9 +56,9 @@ public PIDarcadepointturn(Drivetrain drivetrain, double angletoget) {
     
     
     
-    if (pid < -.1) pid = -.1;
+    if (pid < -.2) pid = -.2;
     
-    if (pid > .1) pid = .1;
+    if (pid > .2) pid = .2;
     
     SmartDashboard.putNumber("Speed for point turn", pid);
     m_drivetrain.tankDrive(-pid, pid, false);
