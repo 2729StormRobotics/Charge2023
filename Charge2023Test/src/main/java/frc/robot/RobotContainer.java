@@ -17,16 +17,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commandgroups.AutoDriveBackwards;
 import frc.robot.commandgroups.ChargeArm;
 import frc.robot.commandgroups.ChargeArm;
-import frc.robot.commandgroups.GridConeMid;
-import frc.robot.commandgroups.GridCubeHigh;
-import frc.robot.commandgroups.GridCubeMid;
+//import frc.robot.commandgroups.GridConeMid;
+//import frc.robot.commandgroups.GridCubeHigh;
+//import frc.robot.commandgroups.GridCubeMid;
 import frc.robot.commandgroups.ShelfPickup;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Claw;
 
-import frc.robot.commands.ChangeArmAngle;
+//import frc.robot.commands.ChangeArmAngle;
 import frc.robot.commands.DriveManuallyArcade;
 import frc.robot.commands.ExampleCommand;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -74,15 +74,15 @@ public class RobotContainer {
 
   private final Arm arm;
   private final Claw claw;
-  private final Drivetrain drivetrain;
+  private final Drivetrain m_drivetrain;
+
 
   private final double straightSpeedFactor = 0.6;
   private final double turnSpeedFactor = 0.5;
   private final double straightDecelSpeedFactor = 0.7;
   private final double turnDecelSpeedFactor = 0.4;
 
-  private final Drivetrain m_drivetrain;
-
+ 
 
   // private final Index m_index;
   // private final Intake m_intake;
@@ -95,11 +95,13 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
-  
     // m_index = new Index();
     // m_intake = new Intake();
      //m_vision = new Vision();
     // m_shooter = new Shooter();
+arm = new Arm();
+    m_drivetrain = new Drivetrain();
+    claw = new Claw();
 
     m_autoChooser = new SendableChooser<>();
     SmartDashboard.putData("Autonomous Selector", m_autoChooser);
@@ -107,21 +109,16 @@ public class RobotContainer {
     m_autoChooser.addOption("DriveBackwardsAndBalance", new DriveBackwardsAndBalance(m_drivetrain));
    // m_autoChooser.addOption("Wall Shot", new AutoWallShot(m_shooter, m_index, m_drivetrain, m_intake, m_vision));
 
-    drivetrain.setDefaultCommand(
-        new DriveManuallyArcade(() -> m_driver.getLeftY(), () -> m_driver.getRightX(), drivetrain));
+    m_drivetrain.setDefaultCommand(
+        new DriveManuallyArcade(() -> m_driver.getLeftY(), () -> m_driver.getRightX(), m_drivetrain));
 
-    arm = new Arm();
-    drivetrain = new Drivetrain();
-    claw = new Claw();
+    
 
-
-    m_drivetrain = new Drivetrain();
     // m_index = new Index();
     // m_intake = new Intake();
      //m_vision = new Vision();
     // m_shooter = new Shooter();
 
-    m_autoChooser = new SendableChooser<>();
     SmartDashboard.putData("Autonomous Selector", m_autoChooser);
     //m_autoChooser.setDefaultOption("Do Nothing", new InstantCommand());
     m_autoChooser.setDefaultOption("DriveBackwardsAndBalance", new DriveBackwardsAndBalance(m_drivetrain));
@@ -132,7 +129,7 @@ public class RobotContainer {
 
 
     // Configure the button bindings
-
+  }
 
   //TAHA WUZ HERE!!! 
 
@@ -141,30 +138,32 @@ public class RobotContainer {
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * @return 
    */
 
 
   private void configureButtonBindings() {
     new Trigger(() -> (m_driver.getLeftTriggerAxis() > 0.01))
         .toggleOnTrue(new DriveManuallyArcade(() -> (m_driver.getLeftY() * straightDecelSpeedFactor),
-        () -> (-m_driver.getRightX() * turnDecelSpeedFactor), drivetrain));
+        () -> (-m_driver.getRightX() * turnDecelSpeedFactor), m_drivetrain));
     //One press of the trigger toggles the speed in which the drivetrain travels in. If true, the drive train will travel at a decellerated speed. Press Again to return to normal operation. 
 
         new Trigger(() -> (m_driver.getRightTriggerAxis() > 0.01))
         .onTrue(new DriveManuallyArcade(() -> (m_driver.getLeftY() * straightSpeedFactor),
-        () -> (-m_driver.getRightX() * turnSpeedFactor), drivetrain));
+        () -> (-m_driver.getRightX() * turnSpeedFactor), m_drivetrain));
         //to NOT be used when slow speed (Left Trigger) is toggled on. This is the normal turning operation speed when the right trigger is held true.
     
 
-    Trigger aOpButton = new JoystickButton(m_operator, Button.kA.value).onTrue(
-      new ChangeArmAngle(arm, arm.getArmAngle() + 30));
+   /* Trigger aOpButton = new JoystickButton(m_operator, Button.kA.value).onTrue(
+      new ChangeArmAngle(arm, arm.getArmAngle() + 30);
 
     new JoystickButton(m_operator, Button.kB.value).whileTrue(
       new ChangeArmAngle(arm, arm.getArmAngle() - 30));
+      */
 
-      Trigger bOpButton = new JoystickButton(m_operator, Button.kB.value).onTrue(new GridCubeMid(arm, drivetrain));
+      //Trigger bOpButton = new JoystickButton(m_operator, Button.kB.value).onTrue(new GridCubeMid(arm, drivetrain));
 
-      Trigger xOpButton = new JoystickButton(m_operator, Button.kX.value).onTrue(new GridConeMid(arm, drivetrain));
+     // Trigger xOpButton = new JoystickButton(m_operator, Button.kX.value).onTrue(new GridConeMid(arm, drivetrain));
 
       //new JoystickButton(m_operator, Button.kY.value).whileTrue(new GridCubeHigh(arm,drivetrain));
 

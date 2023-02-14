@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 import static frc.robot.Constants.ArmConstants.*;
 
-public class ChangeArmAngle extends CommandBase {
+public class changeArmAngle extends CommandBase {
 
   private Arm m_Arm;
 
@@ -16,7 +16,7 @@ public class ChangeArmAngle extends CommandBase {
   private double finalAngle;
 
   /** Creates a new ChangeArmAngle. */
-  public ChangeArmAngle(Arm subsystem, double degree) {
+  public changeArmAngle(Arm subsystem, double degree) {
 
     m_Arm = subsystem;
 
