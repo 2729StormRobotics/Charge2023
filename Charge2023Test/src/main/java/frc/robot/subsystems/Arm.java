@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -20,14 +21,13 @@ public class Arm extends SubsystemBase {
   private CANSparkMax angleMotor;
   private CANSparkMax angleMotorFollower;
   private RelativeEncoder angleEncoder;
+  private DigitalInput limitSwitch;
 
   private double[] angleMotorPID;
 
 
   /** Creates a new Arm 💪 */
   public Arm() {
-
-   
 
     angleMotor = new CANSparkMax(kAngleMotorPort, MotorType.kBrushless);
     angleEncoder = angleMotor.getEncoder();
@@ -36,6 +36,8 @@ public class Arm extends SubsystemBase {
     angleMotorFollower.follow(angleMotor);
 
     angleMotorPID = new double[]{kP,kI,kD}; 
+
+    limitSwitch = new DigitalInput(kLimitSwitchPort);
 
     resetEncoders();
   }
@@ -68,6 +70,11 @@ public class Arm extends SubsystemBase {
 
   @Override
   public void periodic() {
+    // set the arm's angle to 0 when we hit the limit switch
+    if (limitSwitch.get()) {
+      resetEncoders();
+    }
+
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Arm Angle (deg)", getArmAngle());
 
