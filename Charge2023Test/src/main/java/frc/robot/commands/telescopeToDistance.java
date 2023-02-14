@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 import static frc.robot.Constants.ArmConstants.*;
 
-public class telescopeToDistance extends CommandBase {
+public class TelescopeToDistance extends CommandBase {
 
   private Arm m_Arm;
 
