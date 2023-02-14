@@ -32,6 +32,9 @@ public class ChangeArmAngle extends CommandBase {
   @Override
   public void initialize() {
     pid.reset();
+    if (m_Arm.getLimitSwitch()) {
+      m_Arm.resetEncoders();
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
