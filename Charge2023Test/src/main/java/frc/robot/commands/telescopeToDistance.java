@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 import static frc.robot.Constants.ArmConstants.*;
 
-public class TelescopeToDistance extends CommandBase {
+public class telescopeToDistance extends CommandBase {
 
   private Arm m_Arm;
 
   private double distance;
 
   /** Creates a new TelescopeToDistance. */
-  public TelescopeToDistance(Arm subsystem, double dist) {
+  public telescopeToDistance(Arm subsystem, double dist) {
 
     m_Arm = subsystem;
     distance = dist;
