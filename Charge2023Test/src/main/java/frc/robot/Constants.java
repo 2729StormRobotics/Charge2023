@@ -158,7 +158,7 @@ public final class Constants {
 
         public static final double kArmLength = 34.5; // inches
         // tbd
-        public static final double kAngleMotorSpeed = .05;
+        public static final double kAngleMaxMotorSpeed = .1;
         // grid constants
         public static final double kLowAngle = 0;
         public static final double kMidConeAngle = 0;

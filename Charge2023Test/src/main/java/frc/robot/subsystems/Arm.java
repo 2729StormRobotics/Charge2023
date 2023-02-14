@@ -35,7 +35,7 @@ public class Arm extends SubsystemBase {
     angleMotorFollower = new CANSparkMax(kAngleMotorFollowerPort, MotorType.kBrushless);
     angleMotorFollower.follow(angleMotor);
 
-    angleMotorPID = new double[]{kP,kI,kD}; 
+    angleMotorPID = new double[]{kP,kI,kD};
 
     limitSwitch = new DigitalInput(kLimitSwitchPort);
 

@@ -40,10 +40,10 @@ public class ChangeArmAngle extends CommandBase {
     // run the motor at a positive speed to rotate the arm upward, and negative to rotate downward
     // if else in one line
     double pidOut = pid.calculate(m_Arm.getArmAngle(), finalAngle);
-    if (pidOut > .2) {
-      pidOut = .2;
-    } else if (pidOut < -.2) {
-      pidOut = -.2;
+    if (pidOut > kAngleMaxMotorSpeed) {
+      pidOut = kAngleMaxMotorSpeed;
+    } else if (pidOut < -kAngleMaxMotorSpeed) {
+      pidOut = -kAngleMaxMotorSpeed;
     }
     m_Arm.setAngleMotorSpeed(pidOut);
     // m_Arm.setAngleMotorSpeed((m_Arm.getArmAngle() > finalAngle) ? -kAngleMotorSpeed : kAngleMotorSpeed);
