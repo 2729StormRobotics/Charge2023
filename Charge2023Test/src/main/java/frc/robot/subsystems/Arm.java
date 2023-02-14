@@ -8,43 +8,45 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
+
+import edu.wpi.first.wpilibj.DigitalInput;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.ArmConstants.*;
 
-public class Arm extends SubsystemBase {
+import java.util.Arrays;
 
-  private CANSparkMax extensionMotor;
-  private RelativeEncoder extensionEncoder;
+public class Arm extends SubsystemBase {
+  
   private CANSparkMax angleMotor;
-  // private AnalogPotentiometer stringPot;
+
+  private CANSparkMax angleMotorFollower;
   private RelativeEncoder angleEncoder;
+  private DigitalInput limitSwitch;
+
+
+  private double[] angleMotorPID;
+
 
   /** Creates a new Arm 💪 */
   public Arm() {
 
-    extensionMotor = new CANSparkMax(kExtensionMotorPort, MotorType.kBrushless);
-    extensionEncoder = extensionMotor.getEncoder();
 
     angleMotor = new CANSparkMax(kAngleMotorPort, MotorType.kBrushless);
     angleEncoder = angleMotor.getEncoder();
 
-    // AnalogInput input = new AnalogInput(kStringPotPort);
+    angleMotorFollower = new CANSparkMax(kAngleMotorFollowerPort, MotorType.kBrushless);
+    angleMotorFollower.follow(angleMotor);
 
-    // input, full range of motion, starting position
-    // stringPot = new AnalogPotentiometer(input, kMaxExtensionLength, 0);
+    angleMotorPID = new double[]{kP,kI,kD};
+
+    limitSwitch = new DigitalInput(kLimitSwitchPort);
 
     resetEncoders();
-
   }
   
-  public void setExtensionMotorSpeed(double speed) {
-    // run the motor that extends the arm
-    extensionMotor.set(speed);
-  }
 
   public void setAngleMotorSpeed(double speed) {
     // run the motor that changes the angle of the arm
@@ -59,12 +61,11 @@ public class Arm extends SubsystemBase {
   public double getArmAngle() {
     // * 360 to change rotations into degrees
     // % 360 to change keep angles within 0-360 degrees
-    return angleEncoder.getPosition() * 360 % 360;
+    return Math.abs(angleEncoder.getPosition()) / 18.43824577331543 * 360 % 360;
   }
 
-  public double getExtendedDistance() {
-    // convert encoder reading to inches extended on the arm
-    return extensionEncoder.getPosition() / kMaxExtensionLengthInEncoderTicks * kMaxExtensionLength;
+  public double[] getAnglePID() {
+    return angleMotorPID;
   }
 
   public void resetEncoders() {
@@ -76,8 +77,13 @@ public class Arm extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Arm Angle (deg)", getArmAngle());
-    // SmartDashboard.putNumber("String Pot Distance", getStringPotDistance());
-    SmartDashboard.putNumber("Distance Extended (in)", getExtendedDistance());
+
+    // angleMotorPID[0] = SmartDashboard.getNumber("Arm Angle P", 0.0);
+    // angleMotorPID[1] = SmartDashboard.getNumber("Arm Angle I", 0.0);
+    // angleMotorPID[2] = SmartDashboard.getNumber("Arm Angle D", 0.0);
+
+    SmartDashboard.putString("Angle PID In Use", Arrays.toString(angleMotorPID));
+
 
   }
 }
