@@ -77,7 +77,7 @@ public class Arm extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Arm Angle (deg)", getArmAngle());
     // SmartDashboard.putNumber("String Pot Distance", getStringPotDistance());
-    SmartDashboard.putNumber("Distance Extended (in)", getExtendedDistance());
+    //SmartDashboard.putNumber("Distance Extended (in)", getExtendedDistance());
 
   }
 }

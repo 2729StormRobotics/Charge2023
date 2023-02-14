@@ -15,12 +15,10 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commandgroups.AutoDriveBackwards;
-import frc.robot.commandgroups.ChargeArm;
-import frc.robot.commandgroups.ChargeArm;
+
 //import frc.robot.commandgroups.GridConeMid;
 //import frc.robot.commandgroups.GridCubeHigh;
 //import frc.robot.commandgroups.GridCubeMid;
-import frc.robot.commandgroups.ShelfPickup;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -176,9 +174,9 @@ arm = new Arm();
         Trigger lOpTrigger =  new Trigger(() -> (m_operator.getLeftTriggerAxis() > 0.01))
         .whileTrue(new ClawEject(claw));
 
-        Trigger downopDpad = new POVButton(m_operator, 180).onTrue(new ChargeArm(arm));
+       // Trigger downopDpad = new POVButton(m_operator, 180).onTrue(new ChargeArm(arm));
         // down d-pad button
-        Trigger leftopDpad = new POVButton(m_operator, 270).whileTrue(new ShelfPickup(arm));
+       // Trigger leftopDpad = new POVButton(m_operator, 270).whileTrue(new ShelfPickup(arm));
         // left d-pad button
       }
 
