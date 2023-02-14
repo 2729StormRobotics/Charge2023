@@ -57,8 +57,7 @@ public class Drivetrain extends SubsystemBase {
   private final SimpleMotorFeedforward m_leftFeedforward;
   private final SimpleMotorFeedforward m_rightFeedforward;
 
-  private final SparkMaxPIDController m_leftPIDController;
-  private final SparkMaxPIDController m_rightPIDController;
+
 
    private final ADIS16470_IMU m_imu;
   private final DifferentialDriveKinematics m_kinematics;
@@ -96,18 +95,14 @@ public class Drivetrain extends SubsystemBase {
     m_leftFeedforward = new SimpleMotorFeedforward(kLeftS, kLeftV, kLeftA);
     m_rightFeedforward = new SimpleMotorFeedforward(kRightS, kRightV, kRightA);
     
-    // Get PIDController From SparkMax
-    m_leftPIDController = m_leftLeaderMotor.getPIDController();
-    m_rightPIDController = m_rightLeaderMotor.getPIDController();
+
 
     m_imu = new ADIS16470_IMU();
     m_imu.calibrate();
+
   
 
     m_kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(22.));
-
-
-
   }
 
   @Override
@@ -119,8 +114,9 @@ public class Drivetrain extends SubsystemBase {
     // SmartDashboard.putNumber("average distance", getAverageDistance());
     // m_imu.setYawAxis(IMUAxis())
     // * 70 / 360 to convert the Gyro's 'units'
+    // 3.14 is to compensate for the battery and the floor, might have to change that at a later time
     SmartDashboard.putNumber("GyroYaw", getRobotAngle());
-    SmartDashboard.putNumber("GyroRoll", m_imu.getXComplementaryAngle() );
+    SmartDashboard.putNumber("GyroRoll", getRollangle());
   }
 
   // Initializes Motors by Setting Defaults
@@ -228,11 +224,21 @@ public class Drivetrain extends SubsystemBase {
   }
   
   public void resetGyro(){
+  
     m_imu.reset();
+  
+  }
+  public void calibrategyro() {
+    m_imu.calibrate();
   }
 
   public double getRobotAngle(){
     return m_imu.getAngle();
+  }
+
+  public double getRollangle(){
+    return (m_imu.getXComplementaryAngle());
+//-3.14
   }
 
 }
