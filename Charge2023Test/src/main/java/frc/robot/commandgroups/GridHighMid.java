@@ -17,21 +17,21 @@ import static frc.robot.Constants.DriveConstants.kTurnSpeed;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 
-// This command group positions the arm to the high level of the grid in the right position.
+// This command group positions the arm to the high level of the grid in the mid position. 
 
-public class GridHighRight extends ParallelCommandGroup {
+public class GridHighMid extends ParallelCommandGroup {
 
   private final Arm m_arm;
   private final Drivetrain m_drivetrain;
 
   /** Creates a new gridHighLeft. */
-  public GridHighRight(Arm arm, Drivetrain drivetrain) {
+  public GridHighMid(Arm arm, Drivetrain drivetrain) {
 
     m_arm = arm;
     m_drivetrain = drivetrain;
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new PointTurnGyroTank(kTurnSpeed, rightHorizontalShift, m_drivetrain), new ChangeArmAngle(m_arm, highConeAngle), new TelescopeToDistance(m_arm, highExtensionDistance)); 
+    addCommands(new PointTurnGyroTank(kTurnSpeed, midHorizontalShift, m_drivetrain), new ChangeArmAngle(m_arm, highCubeAngle), new TelescopeToDistance(m_arm, highExtensionDistance)); 
   }
 }

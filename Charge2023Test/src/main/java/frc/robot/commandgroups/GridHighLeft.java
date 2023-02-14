@@ -33,7 +33,6 @@ public class GridHighLeft extends ParallelCommandGroup {
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ChangeArmAngle(m_arm, kMidConeAngle));
-  }
-
+    addCommands(new PointTurnGyroTank(kTurnSpeed, leftHorizontalShift, m_drivetrain), new ChangeArmAngle(m_arm, highConeAngle), new TelescopeToDistance(m_arm, highExtensionDistance)); 
+      }
 }
