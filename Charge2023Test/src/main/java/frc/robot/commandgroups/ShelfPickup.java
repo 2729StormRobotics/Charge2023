@@ -13,21 +13,21 @@ import static frc.robot.Constants.ArmConstants.*;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 
-// This command group positions the arm to balance out the robot when driving onto the Charge Station.
+// This command group positions the arm to pickup game pieces from the shelf at the substation.
 
-public class ChargeArm extends ParallelCommandGroup {
+public class ShelfPickup extends ParallelCommandGroup {
 
   private final Arm m_arm;
 
-  /** Creates a new chargeArm. */
-  public ChargeArm(Arm arm) {
+  /** Creates a new gridHighLeft. */
+  public ShelfPickup(Arm arm) {
 
     m_arm = arm;
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
 
-    addCommands(new ChangeArmAngle(m_arm, kChargingAngle));
+    addCommands(new ChangeArmAngle(m_arm, kShelfAngle)); 
 
   }
 }

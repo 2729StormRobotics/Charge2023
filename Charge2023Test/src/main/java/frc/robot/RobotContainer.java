@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.PS4Controller.Axis;
 import edu.wpi.first.wpilibj.XboxController.Button;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commandgroups.AutoDriveBackwards;
@@ -21,8 +22,11 @@ import frc.robot.commandgroups.ChargeArm;
 //import frc.robot.commandgroups.GridCubeHigh;
 //import frc.robot.commandgroups.GridCubeMid;
 import frc.robot.commandgroups.ShelfPickup;
+
+import frc.robot.commands.ChangeArmAngle;
+import frc.robot.commands.ExampleCommand;
+
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Claw;
 
@@ -30,7 +34,6 @@ import frc.robot.subsystems.Claw;
 import frc.robot.commands.DriveManuallyArcade;
 import frc.robot.commands.ExampleCommand;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -95,6 +98,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
+
     // m_index = new Index();
     // m_intake = new Intake();
      //m_vision = new Vision();
@@ -126,6 +130,8 @@ arm = new Arm();
 
     m_drivetrain.setDefaultCommand(
         new DriveManuallyArcade(() -> m_driver.getLeftY(), () -> m_driver.getRightX(), m_drivetrain));
+
+    arm = new Arm();
 
 
     // Configure the button bindings
@@ -185,6 +191,19 @@ arm = new Arm();
 //add vision button binding (Either A,B, or X button Driver)
 
 //add dock and engage button binding (Y-Button Driver)
+
+    new JoystickButton(m_operator, Button.kB.value).whileTrue(
+        new ChangeArmAngle(arm, 0));
+
+    new JoystickButton(m_operator, Button.kY.value).whileTrue(
+        new ChangeArmAngle(arm, 90));
+
+    new JoystickButton(m_operator, Button.kX.value).whileTrue(
+        new ChangeArmAngle(arm, 180));
+
+    new JoystickButton(m_operator, Button.kA.value).whileTrue(
+        new ChangeArmAngle(arm, 270));
+
 
 
   /**
