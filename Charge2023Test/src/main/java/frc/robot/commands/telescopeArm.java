@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 import static frc.robot.Constants.ArmConstants.*;
 
-public class telescopeArm extends CommandBase {
+public class TelescopeArm extends CommandBase {
 
   private Arm m_Arm;
 
   private boolean extend;
 
   /** Creates a new telescopeArm. */
-  public telescopeArm(Arm subsystem, boolean ext) {
+  public TelescopeArm(Arm subsystem, boolean ext) {
 
     m_Arm = subsystem;
     extend = ext;

@@ -4,23 +4,24 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Arm;
 import static frc.robot.Constants.ArmConstants.*;
 
-public class changeArmAngle extends CommandBase {
+public class ChangeArmAngle extends CommandBase {
 
   private Arm m_Arm;
+  private PIDController pid;
 
-  private double initialAngle;
   private double finalAngle;
 
   /** Creates a new ChangeArmAngle. */
-  public changeArmAngle(Arm subsystem, double degree) {
+  public ChangeArmAngle(Arm subsystem, double degree) {
 
     m_Arm = subsystem;
-
-    initialAngle = 0;
+    pid = new PIDController(m_Arm.getAnglePID()[0], m_Arm.getAnglePID()[1], m_Arm.getAnglePID()[2]);
+    
     finalAngle = degree;
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -30,9 +31,7 @@ public class changeArmAngle extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // get the initial angle of the robot
-    initialAngle = m_Arm.getArmAngle();
-
+    pid.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -40,8 +39,14 @@ public class changeArmAngle extends CommandBase {
   public void execute() {
     // run the motor at a positive speed to rotate the arm upward, and negative to rotate downward
     // if else in one line
-    m_Arm.setAngleMotorSpeed(kAngleMotorSpeed * (finalAngle > 0 ? 1 : -1));
-
+    double pidOut = pid.calculate(m_Arm.getArmAngle(), finalAngle);
+    if (pidOut > kAngleMaxMotorSpeed) {
+      pidOut = kAngleMaxMotorSpeed;
+    } else if (pidOut < -kAngleMaxMotorSpeed) {
+      pidOut = -kAngleMaxMotorSpeed;
+    }
+    m_Arm.setAngleMotorSpeed(pidOut);
+    // m_Arm.setAngleMotorSpeed((m_Arm.getArmAngle() > finalAngle) ? -kAngleMotorSpeed : kAngleMotorSpeed);
   }
 
   // Called once the command ends or is interrupted.
@@ -55,6 +60,7 @@ public class changeArmAngle extends CommandBase {
   @Override
   public boolean isFinished() {
     // stop the motor after reaching the desired angle
-    return (Math.abs(m_Arm.getArmAngle() - initialAngle) >= Math.abs(finalAngle));
+    // return false;
+    return (Math.abs(m_Arm.getArmAngle() - finalAngle) <= kArmAngleTolerance);
   }
 }

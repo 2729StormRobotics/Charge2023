@@ -4,24 +4,31 @@
 
 package frc.robot.commandgroups;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.VisionDriveToPointOfInterest;
-import frc.robot.commands.VisionPointToPointOfInference;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.ChangeArmAngle;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Vision;
+import static frc.robot.Constants.ArmConstants.*;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-// Gets robot to point of interest
-public class VisionMoveToPointOfInterest extends SequentialCommandGroup {
-  /** Creates a new VisionMoveToPointOfInterest. */
-  public VisionMoveToPointOfInterest(Vision vision, Drivetrain drivetrain) {
+
+// This command group positions the arm to the high level of the grid in the mid position. 
+
+public class GridCubeMid extends ParallelCommandGroup {
+
+  private final Arm m_arm;
+
+  /** Creates a new gridHighLeft. */
+  public GridCubeMid(Arm arm, Drivetrain drivetrain) {
+
+    m_arm = arm;
+
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new VisionPointToPointOfInference(vision, drivetrain),
-      new VisionDriveToPointOfInterest(vision, drivetrain)
-    );
+
+    addCommands(new ChangeArmAngle(m_arm, kMidCubeAngle));
+
   }
 }
