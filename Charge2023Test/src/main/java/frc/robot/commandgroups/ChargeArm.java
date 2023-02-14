@@ -27,6 +27,8 @@ public class ChargeArm extends ParallelCommandGroup {
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ChangeArmAngle(m_arm, chargingAngle), new TelescopeToDistance(m_arm, chargingExtensionDistance));
+
+    addCommands(new ChangeArmAngle(m_arm, kChargingAngle));
+
   }
 }

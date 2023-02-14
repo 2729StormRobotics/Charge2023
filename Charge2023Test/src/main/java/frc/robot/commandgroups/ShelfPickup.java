@@ -29,6 +29,7 @@ public class ShelfPickup extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
 
 
-    addCommands(new ChangeArmAngle(m_arm, shelfAngle), new TelescopeToDistance(m_arm, shelfExtensionDistance)); 
+    addCommands(new ChangeArmAngle(m_arm, kShelfAngle)); 
+
   }
 }

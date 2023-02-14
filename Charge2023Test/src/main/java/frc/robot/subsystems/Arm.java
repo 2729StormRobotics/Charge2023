@@ -7,7 +7,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,22 +20,32 @@ public class Arm extends SubsystemBase {
   private CANSparkMax extensionMotor;
   private RelativeEncoder extensionEncoder;
   private CANSparkMax angleMotor;
+
+  private CANSparkMax angleMotorFollower;
+
   // private AnalogPotentiometer stringPot;
-  private RelativeEncoder angleEncoder;
+ private RelativeEncoder angleEncoder;
+  private DigitalInput limitSwitch;
 
   /** Creates a new Arm 💪 */
   public Arm() {
 
-    extensionMotor = new CANSparkMax(kExtensionMotorPort, MotorType.kBrushless);
-    extensionEncoder = extensionMotor.getEncoder();
 
     angleMotor = new CANSparkMax(kAngleMotorPort, MotorType.kBrushless);
     angleEncoder = angleMotor.getEncoder();
+
+    angleMotorFollower = new CANSparkMax(kAngleMotorFollowerPort, MotorType.kBrushless);
+    angleMotorFollower.follow(angleMotor);
+
+    angleMotorPID = new double[]{kP,kI,kD};
+
+    limitSwitch = new DigitalInput(kLimitSwitchPort);
 
     // AnalogInput input = new AnalogInput(kStringPotPort);
 
     // input, full range of motion, starting position
     // stringPot = new AnalogPotentiometer(input, kMaxExtensionLength, 0);
+
 
     resetEncoders();
 
@@ -74,6 +84,11 @@ public class Arm extends SubsystemBase {
 
   @Override
   public void periodic() {
+    // set the arm's angle to 0 when we hit the limit switch
+    if (limitSwitch.get()) {
+      resetEncoders();
+    }
+
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Arm Angle (deg)", getArmAngle());
     // SmartDashboard.putNumber("String Pot Distance", getStringPotDistance());
