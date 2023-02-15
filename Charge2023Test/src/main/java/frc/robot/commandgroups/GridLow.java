@@ -4,29 +4,6 @@
 
 package frc.robot.commandgroups;
 
-<<<<<<<< HEAD:Charge2023Test/src/main/java/frc/robot/commandgroups/PIDPointturncommand.java
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.PIDarcadepointturn;
-import frc.robot.commands.PointTurnGyroPID;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.commands.PIDarcadepointturn;
-
-
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PIDPointturncommand extends SequentialCommandGroup {
-  /** Creates a new PIDPointturn. */
-  public PIDPointturncommand(Drivetrain drivetrain) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    // int angle = 90;
-     addCommands(new PIDarcadepointturn(drivetrain, 90) );
-
-    // angle += 90;
-    
- 
-========
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.ChangeArmAngle;
 import frc.robot.subsystems.Arm;
@@ -50,7 +27,5 @@ public class GridLow extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new ChangeArmAngle(m_arm, kLowAngle ));
->>>>>>>> dev:Charge2023Test/src/main/java/frc/robot/commandgroups/GridLow.java
   }
-
 }

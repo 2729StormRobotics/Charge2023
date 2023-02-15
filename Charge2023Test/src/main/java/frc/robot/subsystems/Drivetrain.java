@@ -120,11 +120,7 @@ public class Drivetrain extends SubsystemBase {
     // m_imu.setYawAxis(IMUAxis())
     // * 70 / 360 to convert the Gyro's 'units'
     SmartDashboard.putNumber("GyroYaw", getRobotAngle());
-
-    SmartDashboard.putNumber("GyroRoll", getRollangle());
-    SmartDashboard.putNumber("GyroSide", m_imu.getYComplementaryAngle());
-  
-
+    SmartDashboard.putNumber("GyroRoll", m_imu.getXComplementaryAngle() );
   }
 
   // Initializes Motors by Setting Defaults
@@ -221,7 +217,6 @@ public class Drivetrain extends SubsystemBase {
   
   // Drives Using Arcade Drive
   public void arcadeDrive(double speed, double turn, boolean squareInputs){
-
     m_drive.arcadeDrive(speed, turn, squareInputs);
 
     // SmartDashboard.putNumber("forward power", speed);
@@ -237,7 +232,6 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public double getRobotAngle(){
-
     return m_imu.getAngle();
   }
 

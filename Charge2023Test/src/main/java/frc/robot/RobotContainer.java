@@ -6,20 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commandgroups.AutoDriveBackwards;
-import frc.robot.commandgroups.DriveBackwardsAndBalance;
-import frc.robot.commandgroups.PIDPointturncommand;
-import frc.robot.commandgroups.PIDPointturncommand;
-import frc.robot.commands.DriveDistance;
-import frc.robot.commands.DriveManuallyArcade;
-import frc.robot.commands.PointTurnGyroPID;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.commands.PointTurnGyroTank;
-
+import frc.robot.commands.ChangeArmAngle;
+import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -47,29 +37,10 @@ public class RobotContainer {
    */
   public RobotContainer() {
 
-    m_drivetrain = new Drivetrain();
-    // m_index = new Index();
-    // m_intake = new Intake();
-     //m_vision = new Vision();
-    // m_shooter = new Shooter();
-
-    m_autoChooser = new SendableChooser<>();
-    SmartDashboard.putData("Autonomous Selector", m_autoChooser);
-    //m_autoChooser.setDefaultOption("Do Nothing", new InstantCommand());
-    m_autoChooser.setDefaultOption("DriveBackwardsAndBalance", new DriveBackwardsAndBalance(m_drivetrain));
-    m_autoChooser.addOption("PointTurn",new PIDPointturncommand(m_drivetrain));
-
-    
-   // m_autoChooser.addOption("Wall Shot", new AutoWallShot(m_shooter, m_index, m_drivetrain, m_intake, m_vision));
-
-    m_drivetrain.setDefaultCommand(
-        new DriveManuallyArcade(() -> m_driver.getLeftY(), () -> m_driver.getRightX(), m_drivetrain));
+    arm = new Arm();
 
     // Configure the button bindings
-    new JoystickButton(m_operator, Button.kY.value).onTrue(
-      new PointTurnGyroPID(90, m_drivetrain));
- 
-
+    configureButtonBindings();
   }
 
   /**
