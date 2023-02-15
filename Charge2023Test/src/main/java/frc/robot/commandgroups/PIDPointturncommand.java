@@ -4,7 +4,6 @@
 
 package frc.robot.commandgroups;
 
-<<<<<<<< HEAD:Charge2023Test/src/main/java/frc/robot/commandgroups/PIDPointturncommand.java
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.PIDarcadepointturn;
 import frc.robot.commands.PointTurnGyroPID;
@@ -26,31 +25,7 @@ public class PIDPointturncommand extends SequentialCommandGroup {
     // angle += 90;
     
  
-========
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.ChangeArmAngle;
-import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.Drivetrain;
-import static frc.robot.Constants.ArmConstants.*;
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 
-// This command group positions the arm to the high level of the grid in the mid position. 
-
-public class GridLow extends ParallelCommandGroup {
-
-  private final Arm m_arm;
-
-  /** Creates a new gridHighLeft. */
-  public GridLow(Arm arm, Drivetrain drivetrain) {
-
-    m_arm = arm;
-
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ChangeArmAngle(m_arm, kLowAngle ));
->>>>>>>> dev:Charge2023Test/src/main/java/frc/robot/commandgroups/GridLow.java
   }
 
 }
