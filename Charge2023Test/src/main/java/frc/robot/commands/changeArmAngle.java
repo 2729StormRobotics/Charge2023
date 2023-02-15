@@ -33,6 +33,11 @@ public class changeArmAngle extends CommandBase {
     // get the initial angle of the robot
     initialAngle = m_Arm.getArmAngle();
 
+
+    pid.reset();
+    if (m_Arm.getLimitSwitch()) {
+      m_Arm.resetEncoders();
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.

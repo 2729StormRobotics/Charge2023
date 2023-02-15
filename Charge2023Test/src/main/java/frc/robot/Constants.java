@@ -166,10 +166,25 @@ public final class Constants {
         // CHANGE kMaxExtensionLengthInEncoderTicks!
         public static final double kMaxExtensionLengthInEncoderTicks = 5.0;
         public static final double kMaxExtensionLength = 63.75; // inches
+
+        // port numbers
+        public static final int kExtensionMotorPort = 9;
+        public static final int kAngleMotorPort = 8;
+        public static final int kAngleMotorFollowerPort = 2;
+        public static final int kLimitSwitchPort = 0;
+
+        // encoder
+        public static final double kEncoderTicksPerRevolution = 11.881006240844727;
+
+        // Arm Angle Tolerance
+        public static final double kArmAngleTolerance = .1;
+
+        public static final double kArmLength = 34.5; // inches
+
         // tbd
-        public static final double kAngleMotorSpeed = .5;
-        public static final double kExtensionMotorSpeed = .5;
+        public static final double kAngleMaxMotorSpeed = .05;
         // grid constants
+
         public static final double leftHorizontalShift = 0;
         public static final double midHorizontalShift = 0;
         public static final double rightHorizontalShift = 0;
@@ -187,6 +202,18 @@ public final class Constants {
         // charge station constants
         public static final double chargingAngle = 0;
         public static final double chargingExtensionDistance = 0;
+
+        public static final double kLowAngle = 0;
+        public static final double kMidConeAngle = 0;
+        public static final double kMidCubeAngle = 0;
+        public static final double kShelfAngle = 0;
+        // charge station constants
+        public static final double kChargingAngle = 0;
+        // angle motor pid
+        public static final double kP = 0.00425;
+        public static final double kI = 0;
+        public static final double kD = 0;
+
     }
 
 
