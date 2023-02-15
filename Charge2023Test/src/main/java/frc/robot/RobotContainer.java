@@ -93,34 +93,23 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
-    // m_index = new Index();
-    // m_intake = new Intake();
-     //m_vision = new Vision();
-    // m_shooter = new Shooter();
 arm = new Arm();
     m_drivetrain = new Drivetrain();
     claw = new Claw();
 
     m_autoChooser = new SendableChooser<>();
     SmartDashboard.putData("Autonomous Selector", m_autoChooser);
-    //m_autoChooser.setDefaultOption("Do Nothing", new InstantCommand());
+   
     m_autoChooser.addOption("DriveBackwardsAndBalance", new DriveBackwardsAndBalance(m_drivetrain));
-   // m_autoChooser.addOption("Wall Shot", new AutoWallShot(m_shooter, m_index, m_drivetrain, m_intake, m_vision));
+
 
     m_drivetrain.setDefaultCommand(
         new DriveManuallyArcade(() -> m_driver.getLeftY(), () -> m_driver.getRightX(), m_drivetrain));
 
-    
-
-    // m_index = new Index();
-    // m_intake = new Intake();
-     //m_vision = new Vision();
-    // m_shooter = new Shooter();
-
     SmartDashboard.putData("Autonomous Selector", m_autoChooser);
-    //m_autoChooser.setDefaultOption("Do Nothing", new InstantCommand());
+    
     m_autoChooser.setDefaultOption("DriveBackwardsAndBalance", new DriveBackwardsAndBalance(m_drivetrain));
-   // m_autoChooser.addOption("Wall Shot", new AutoWallShot(m_shooter, m_index, m_drivetrain, m_intake, m_vision));
+
 
     m_drivetrain.setDefaultCommand(
         new DriveManuallyArcade(() -> m_driver.getLeftY(), () -> m_driver.getRightX(), m_drivetrain));
@@ -161,7 +150,7 @@ arm = new Arm();
 
       //Trigger bOpButton = new JoystickButton(m_operator, Button.kB.value).onTrue(new GridCubeMid(arm, drivetrain));
 
-     // Trigger xOpButton = new JoystickButton(m_operator, Button.kX.value).onTrue(new GridConeMid(arm, drivetrain));
+     //Trigger xOpButton = new JoystickButton(m_operator, Button.kX.value).onTrue(new GridConeMid(arm, drivetrain));
 
       //new JoystickButton(m_operator, Button.kY.value).whileTrue(new GridCubeHigh(arm,drivetrain));
 
