@@ -29,5 +29,4 @@ public class GridLow extends ParallelCommandGroup {
     addCommands(new ChangeArmAngle(m_arm, kLowAngle ));
 
   }
-
 }
