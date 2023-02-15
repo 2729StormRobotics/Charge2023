@@ -29,8 +29,7 @@ public class PointTurnGyroPID extends PIDCommand {
         output -> {
           // Use the output here
           double o = MathUtil.clamp(Math.abs(output), 0.1, 0.5);
-          drivetrain.tankDrive(o * Math.signum(output), -o * Math.signum(output), false);
-  
+          drivetrain.tankDrive(-o , o, false);
         });
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
@@ -39,7 +38,7 @@ public class PointTurnGyroPID extends PIDCommand {
     drivetrain.resetGyro();
 
     getController().enableContinuousInput(-180, 180);
-    getController().setTolerance(0.5);
+    getController().setTolerance(5);
   }
 
   // Returns true when the command should end.
