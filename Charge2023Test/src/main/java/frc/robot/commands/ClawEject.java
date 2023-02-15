@@ -5,11 +5,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Claw;
 
 public class ClawEject extends CommandBase {
-  /** Creates a new ClawEject. */
-  public ClawEject() {
+  private static final double kshootSpeed = 0;
+  private final Claw m_claw;
+
+  /** Creates a new ClawPickup. */
+  public ClawEject(Claw subsystem) {
+
+    m_claw = subsystem;
+
     // Use addRequirements() here to declare subsystem dependencies.
+
+  addRequirements(m_claw);
   }
 
   // Called when the command is initially scheduled.
@@ -18,11 +27,19 @@ public class ClawEject extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_claw.ejectRollerMotors(kshootSpeed);
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_claw.retractLeftPiston();
+    m_claw.retractRightPiston();
+    m_claw.haltMotors(0);
+
+  }
 
   // Returns true when the command should end.
   @Override
