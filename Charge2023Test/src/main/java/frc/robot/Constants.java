@@ -159,8 +159,8 @@ public final class Constants {
 
     public static final class ArmConstants {
         // need all port nums
-        public static final int kExtensionMotorPort = -1;
-        public static final int kAngleMotorPort = -1;
+        //public static final int kExtensionMotorPort = -1;
+        //public static final int kAngleMotorPort = -1;
         public static final int kStringPotPort = -1;
 
         // CHANGE kMaxExtensionLengthInEncoderTicks!
