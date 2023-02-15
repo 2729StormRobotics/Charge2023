@@ -5,54 +5,47 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Claw;
 
+public class ClawConePickup extends CommandBase {
+  private static final double kRollerMotorStopSpeed = 0;
+  private final Claw m_claw;
 
-public class PointTurnGyroTank extends CommandBase {
+  /** Creates a new ClawPickup. */
+  public ClawConePickup(Claw subsystem) {
 
-  private final Drivetrain m_drivetrain;
-
-  private final double m_speed;
-
-  private final double m_angle;
-
-  
-  /** Creates a new GyroTankPointTurn. */
-  public PointTurnGyroTank(double speed, double angle, Drivetrain drivetrain) {
-
-    m_speed = speed;
-    m_drivetrain = drivetrain;
-    m_angle = angle;
-
+    m_claw = subsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_drivetrain);
+
+  addRequirements(m_claw);
   }
+
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-     m_drivetrain.resetGyro();
+  public void initialize() {}
 
-  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+m_claw.extendLeftPiston();
+m_claw.extendRightPiston();
+m_claw.runRollerMotors(0);
+m_claw.stopRollerMotors(kRollerMotorStopSpeed);
 
-    m_drivetrain.tankDrive(m_speed * Math.signum(m_angle), m_speed * Math.signum(m_angle) * -1, false);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_drivetrain.stopDrive();
+    m_claw.haltMotors(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    
-    return Math.abs(m_drivetrain.getRobotAngle()) >= Math.abs(m_angle);
+    return false;
   }
 }
