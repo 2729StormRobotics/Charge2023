@@ -142,7 +142,7 @@ arm = new Arm();
       */
 
       //Trigger bOpButton = new JoystickButton(m_operator, Button.kB.value).onTrue(new GridCubeMid(arm, drivetrain));
-Trigger bOpButton = new JoystickButton(m_operator, Button.kB.value).onTrue(ClawPickup(claw));
+Trigger bOpButton = new JoystickButton(m_operator, Button.kB.value).onTrue(new ClawPickup(claw));
      //Trigger xOpButton = new JoystickButton(m_operator, Button.kX.value).onTrue(new GridConeMid(arm, drivetrain));
 
       //new JoystickButton(m_operator, Button.kY.value).whileTrue(new GridLow(arm,drivetrain));
@@ -168,11 +168,6 @@ Trigger bOpButton = new JoystickButton(m_operator, Button.kB.value).onTrue(ClawP
 //add vision button binding (Either A,B, or X button Driver)
 
 //add dock and engage button binding (Y-Button Driver)
-
-
-  private Command ClawPickup(Claw claw2) {
-    return null;
-}
 
 /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
