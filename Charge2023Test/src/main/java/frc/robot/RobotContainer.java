@@ -7,9 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.ChangeArmAngle;
+import frc.robot.commands.ChangeLedColor;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Lights;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -31,6 +33,7 @@ public class RobotContainer {
   private final XboxController m_operator = new XboxController(DriveConstants.kOperatorControllerPort);
 
   private final Arm arm;
+  private final Lights lights;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -38,6 +41,7 @@ public class RobotContainer {
   public RobotContainer() {
 
     arm = new Arm();
+    lights = new Lights();
 
     // Configure the button bindings
     configureButtonBindings();
@@ -53,18 +57,21 @@ public class RobotContainer {
    */
 
   private void configureButtonBindings() {
-
+    //hot pink
     new JoystickButton(m_operator, Button.kB.value).whileTrue(
-        new ChangeArmAngle(arm, 0));
+        new ChangeLedColor(lights, 0.57));
 
+    //green
     new JoystickButton(m_operator, Button.kY.value).whileTrue(
-        new ChangeArmAngle(arm, 90));
+        new ChangeLedColor(lights, 0.81));
 
+    //yellow
     new JoystickButton(m_operator, Button.kX.value).whileTrue(
-        new ChangeArmAngle(arm, 180));
+        new ChangeLedColor(lights, 0.69));
 
+    //violet
     new JoystickButton(m_operator, Button.kA.value).whileTrue(
-        new ChangeArmAngle(arm, 270));
+        new ChangeLedColor(lights, 0.91));
 
   }
 
