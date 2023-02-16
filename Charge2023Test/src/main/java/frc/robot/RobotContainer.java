@@ -15,7 +15,10 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commandgroups.AutoDriveBackwards;
-
+import frc.robot.commandgroups.ChargeArm;
+import frc.robot.commandgroups.GridConeMid;
+import frc.robot.commandgroups.GridLow;
+import frc.robot.commandgroups.ShelfPickup;
 //import frc.robot.commandgroups.GridConeMid;
 //import frc.robot.commandgroups.GridCubeHigh;
 //import frc.robot.commandgroups.GridCubeMid;
@@ -109,6 +112,8 @@ public class RobotContainer {
 
 
     // Configure the button bindings
+    configureButtonBindings();
+
   }
 
   //TAHA WUZ HERE!!! 
@@ -143,28 +148,33 @@ public class RobotContainer {
 //add dock and engage button binding (Y-Button Driver)
 
 //****Operator Controller Button bindings****
-      //Trigger bOpButton = new JoystickButton(m_operator, Button.kB.value).onTrue(new GridCubeMid(arm, drivetrain));
-Trigger bOpButton = new JoystickButton(m_operator, Button.kB.value).onTrue(new ClawPickup(claw));
-     //Trigger xOpButton = new JoystickButton(m_operator, Button.kX.value).onTrue(new GridConeMid(arm, drivetrain));
+//bOpButton
+//new JoystickButton(m_operator, Button.kB.value).onTrue(new GridCubeMid(arm, drivetrain));
+    
+//xOpButton 
+new JoystickButton(m_operator, Button.kX.value).onTrue(new GridConeMid(arm, m_drivetrain));
 
-      //new JoystickButton(m_operator, Button.kA.value).whileTrue(new GridLow(arm,drivetrain));
-      Trigger aOpButton =  new JoystickButton(m_operator, Button.kY.value).onTrue(new ClawPickup(claw));
+//aOpButton  
+new JoystickButton(m_operator, Button.kA.value).onTrue(new GridLow(arm,m_drivetrain));
+    
+//rBumpOpButton
+ new JoystickButton(m_operator, Button.kRightBumper.value).onTrue(new ClawPickup(claw));
 
-
-      Trigger rBumpOpButton = new JoystickButton(m_operator, Button.kRightBumper.value).onTrue(new ClawPickup(claw));
-
-     Trigger rOpTrigger = new Trigger(() -> (m_operator.getRightTriggerAxis() > 0.01))
+    
+//rOpTrigger
+new Trigger(() -> (m_operator.getRightTriggerAxis() > 0.01))
         .whileTrue(new ClawConePickup(claw));
 
-
-        Trigger lOpTrigger =  new Trigger(() -> (m_operator.getLeftTriggerAxis() > 0.01))
+//lOpTrigger
+ new Trigger(() -> (m_operator.getLeftTriggerAxis() > 0.01))
         .whileTrue(new ClawEject(claw));
 
-       // Trigger downopDpad = new POVButton(m_operator, 180).onTrue(new ChargeArm(arm));
-       Trigger downopDpad = new POVButton(m_operator, 180).onTrue(new ClawPickup(claw));
-        // down d-pad button
-       // Trigger leftopDpad = new POVButton(m_operator, 270).whileTrue(new ShelfPickup(arm));
-        // left d-pad button
+//downopDpad -- down d-pad button
+new POVButton(m_operator, 180).onTrue(new ChargeArm(arm));
+      
+//leftopDpad left d-pad button
+new POVButton(m_operator, 270).whileTrue(new ShelfPickup(arm));
+     
       }
 
 
