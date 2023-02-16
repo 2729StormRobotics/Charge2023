@@ -152,7 +152,7 @@ public final class Constants {
         public static final int kExtensionMotorPort = 9;
         public static final int kAngleMotorPort = 8;
         public static final int kAngleMotorFollowerPort = 2;
-        public static final int kLimitSwitchPort = -1;
+        public static final int kLimitSwitchPort = 0;
 
         // Arm Angle Tolerance
         public static final double kArmAngleTolerance = .1;
