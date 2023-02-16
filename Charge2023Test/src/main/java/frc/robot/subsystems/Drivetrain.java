@@ -236,6 +236,14 @@ public class Drivetrain extends SubsystemBase {
     m_imu.reset();
   }
 
+  public void calibrategyro() {
+    m_imu.calibrate();
+  }
+
+  public double getRollangle(){
+    return (m_imu.getXComplementaryAngle() * -1);
+  }
+
   public double getRobotAngle(){
 
     return m_imu.getAngle();

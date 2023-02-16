@@ -36,7 +36,7 @@ public PIDarcadepointturn(Drivetrain drivetrain, double angletoget) {
 
     addRequirements(m_drivetrain);
    // m_drivetrain.resetGyro();
-    m_drivetrain.calibrategyro();
+    // m_drivetrain.calibrategyro();
   }
   
   // Called when the command is initially scheduled.

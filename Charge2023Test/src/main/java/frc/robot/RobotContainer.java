@@ -40,7 +40,9 @@ public class RobotContainer {
   private final XboxController m_driver = new XboxController(DriveConstants.kDriverControllerPort);
   private final XboxController m_operator = new XboxController(DriveConstants.kOperatorControllerPort);
 
-  private final Arm arm;
+ 
+private final SendableChooser<Command> m_autoChooser;
+  private final Drivetrain m_drivetrain;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -82,19 +84,6 @@ public class RobotContainer {
    */
 
   private void configureButtonBindings() {
-
-    new JoystickButton(m_operator, Button.kB.value).whileTrue(
-        new ChangeArmAngle(arm, 0));
-
-    new JoystickButton(m_operator, Button.kY.value).whileTrue(
-        new ChangeArmAngle(arm, 90));
-
-    new JoystickButton(m_operator, Button.kX.value).whileTrue(
-        new ChangeArmAngle(arm, 180));
-
-    new JoystickButton(m_operator, Button.kA.value).whileTrue(
-        new ChangeArmAngle(arm, 270));
-
   }
 
   /**
@@ -106,7 +95,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
 
     // An ExampleCommand will run in autonomous
-    return new ExampleCommand(new ExampleSubsystem());
+    return m_autoChooser.getSelected();
 
   }
 
