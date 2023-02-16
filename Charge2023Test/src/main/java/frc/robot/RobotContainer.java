@@ -87,7 +87,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
-arm = new Arm();
+    arm = new Arm();
     m_drivetrain = new Drivetrain();
     claw = new Claw();
 
@@ -124,14 +124,10 @@ arm = new Arm();
 
   private void configureButtonBindings() {
     new Trigger(() -> (m_driver.getLeftTriggerAxis() > 0.01))
-        .toggleOnTrue(new DriveManuallyArcade(() -> (m_driver.getLeftY() * straightDecelSpeedFactor),
+        .onTrue(new DriveManuallyArcade(() -> (m_driver.getLeftY() * straightDecelSpeedFactor),
         () -> (-m_driver.getRightX() * turnDecelSpeedFactor), m_drivetrain));
-    //One press of the trigger toggles the speed in which the drivetrain travels in. If true, the drive train will travel at a decellerated speed. Press Again to return to normal operation. 
+    //Holding the trigger slows the speed in which the drivetrain travels in. If true, the drive train will travel at a decellerated speed. Press Again to return to normal operation. 
 
-        new Trigger(() -> (m_driver.getRightTriggerAxis() > 0.01))
-        .onTrue(new DriveManuallyArcade(() -> (m_driver.getLeftY() * straightSpeedFactor),
-        () -> (-m_driver.getRightX() * turnSpeedFactor), m_drivetrain));
-        //to NOT be used when slow speed (Left Trigger) is toggled on. This is the normal turning operation speed when the right trigger is held true.
     
 
    /* Trigger aOpButton = new JoystickButton(m_operator, Button.kA.value).onTrue(
@@ -139,14 +135,20 @@ arm = new Arm();
 
     new JoystickButton(m_operator, Button.kB.value).whileTrue(
       new ChangeArmAngle(arm, arm.getArmAngle() - 30));
+
       */
 
+      //add vision button binding (Either A,B, or X button Driver)
+
+//add dock and engage button binding (Y-Button Driver)
+
+//****Operator Controller Button bindings****
       //Trigger bOpButton = new JoystickButton(m_operator, Button.kB.value).onTrue(new GridCubeMid(arm, drivetrain));
 Trigger bOpButton = new JoystickButton(m_operator, Button.kB.value).onTrue(new ClawPickup(claw));
      //Trigger xOpButton = new JoystickButton(m_operator, Button.kX.value).onTrue(new GridConeMid(arm, drivetrain));
 
-      //new JoystickButton(m_operator, Button.kY.value).whileTrue(new GridLow(arm,drivetrain));
-      Trigger yOpButton =  new JoystickButton(m_operator, Button.kY.value).onTrue(new ClawPickup(claw));
+      //new JoystickButton(m_operator, Button.kA.value).whileTrue(new GridLow(arm,drivetrain));
+      Trigger aOpButton =  new JoystickButton(m_operator, Button.kY.value).onTrue(new ClawPickup(claw));
 
 
       Trigger rBumpOpButton = new JoystickButton(m_operator, Button.kRightBumper.value).onTrue(new ClawPickup(claw));
@@ -165,9 +167,7 @@ Trigger bOpButton = new JoystickButton(m_operator, Button.kB.value).onTrue(new C
         // left d-pad button
       }
 
-//add vision button binding (Either A,B, or X button Driver)
 
-//add dock and engage button binding (Y-Button Driver)
 
 /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
