@@ -11,7 +11,7 @@ public class ClawConePickup extends CommandBase {
   private static final double kRollerMotorStopSpeed = 0;
   private final Claw m_claw;
 
-  /** Creates a new ClawPickup. */
+  /** Creates a new ClawConePickup. */
   public ClawConePickup(Claw subsystem) {
 
     m_claw = subsystem;
@@ -29,18 +29,23 @@ public class ClawConePickup extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
+    //initiates the cone pickup sequence by extending the pistons and then running the motors. The motors will then stop after the claw has a "grip" on the cone (stopRollerMotors is called)
+
   public void execute() {
-m_claw.extendLeftPiston();
-m_claw.extendRightPiston();
-m_claw.runRollerMotors(0);
-m_claw.stopRollerMotors(kRollerMotorStopSpeed);
+//the pistons (which are connected to one roller) close in to squeeze the cone. *the retract values (located in claw constants) may need to be tweaked during testing to see which length is the correct length for the cone pickup.
+m_claw.retractLeftPiston();
+m_claw.retractRightPiston();
+
+m_claw.runRollerMotors(0); //the motors spin to intake the cone upwards
+m_claw.stopRollerMotorsCone(kRollerMotorStopSpeed); //once the current limit is reached, this should mean that the cone is being held and the motors are ready to stop. 
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_claw.haltMotors(0);
+    //motors are completely stopped
+    m_claw.haltMotors(0); 
   }
 
   // Returns true when the command should end.

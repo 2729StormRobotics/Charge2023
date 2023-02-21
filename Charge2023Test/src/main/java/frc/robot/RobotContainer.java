@@ -37,7 +37,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ClawConePickup;
 import frc.robot.commands.ClawEject;
-import frc.robot.commands.ClawPickup;
+import frc.robot.commands.ClawCubePickup;
 import frc.robot.commands.DriveDistance;
 import frc.robot.commands.PointTurnGyroPID;
 import frc.robot.commands.PointTurnGyroTank;
@@ -52,6 +52,8 @@ import frc.robot.commands.PointTurnGyroTank;
 
 import static frc.robot.Constants.*;
 import static frc.robot.Constants.DriveConstants.*;
+import frc.robot.commands.ChangeLedColor;
+import frc.robot.subsystems.Lights;
 
 
 /**
@@ -162,7 +164,7 @@ new JoystickButton(m_operator, Button.kX.value).onTrue(new GridConeMid(arm, m_dr
 new JoystickButton(m_operator, Button.kA.value).onTrue(new GridLow(arm,m_drivetrain));
     
 //rBumpOpButton
- new JoystickButton(m_operator, Button.kRightBumper.value).onTrue(new ClawPickup(claw));
+ new JoystickButton(m_operator, Button.kRightBumper.value).onTrue(new ClawCubePickup(claw));
 
     
 //rOpTrigger

@@ -33,6 +33,10 @@ public final class Constants {
 
         public static final int kColorSensorPort = 0;
         public static final int kBeamBreakPort = 0;
+        public static final double kCubeCurrent = 0;
+        public static final double kConeCurrent = 0;
+
+
 
 
         public static final int kLeftPistonExtendChannel = 0;

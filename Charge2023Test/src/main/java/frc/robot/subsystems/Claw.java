@@ -53,20 +53,37 @@ public boolean hasPiece() {
   return !m_clawBeamBreak.get();
 }
 
-//measures the motor current while the motors are running, once the current has spiked certain value (kCurrent) then we know we have a game piece
-public boolean hasPieceV2() {
-  return !(m_rightRollerMotor.getOutputCurrent() > kCurrent);
+//measures the motor current while the motors are running, once the current has spiked certain value (kCurrent) then we know we have a game piece.
+
+//DURING TESTING, use shuffleboard to grab the current value for when the game piece is fully clasped.
+public boolean hasPieceCube() {
+  return !(m_rightRollerMotor.getOutputCurrent() > kCubeCurrent);
+}
+
+
+public boolean hasPieceCone() {
+  return !(m_rightRollerMotor.getOutputCurrent() > kConeCurrent);
 }
 
  //stops both motors
- public void stopRollerMotors(double kRollerMotorStopSpeed) {
-  if (hasPieceV2()== true) {
+ public void stopRollerMotorsCone(double kRollerMotorStopSpeed) {
+  if (hasPieceCone()== true) {
     m_leftRollerMotor.set(kRollerMotorStopSpeed);
     m_rightRollerMotor.set(kRollerMotorStopSpeed);
   } 
 
 
 }
+
+public void stopRollerMotorsCube(double kRollerMotorStopSpeed) {
+  if (hasPieceCube()== true) {
+    m_leftRollerMotor.set(kRollerMotorStopSpeed);
+    m_rightRollerMotor.set(kRollerMotorStopSpeed);
+  } 
+
+
+}
+
 
 public void haltMotors(double kRollerMotorStopSpeed) {
 
@@ -99,7 +116,8 @@ public void extendLeftPiston () {
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("Have Game Piece", hasPiece());
+    SmartDashboard.putBoolean("Have Cube", hasPieceCube());
+    SmartDashboard.putBoolean("Have Cone", hasPieceCone());
     SmartDashboard.putNumber("Roller Current Output", m_rightRollerMotor.getOutputCurrent());
     // This method will be called once per scheduler run
   }

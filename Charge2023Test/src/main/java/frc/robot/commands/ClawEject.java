@@ -28,6 +28,7 @@ public class ClawEject extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //reverses the motors so the game piece is being ejected.
     m_claw.ejectRollerMotors(kshootSpeed);
 
   }
@@ -35,8 +36,9 @@ public class ClawEject extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_claw.retractLeftPiston();
-    m_claw.retractRightPiston();
+    //after the game piece is ejected, the pistons return to the default position and motors are stopped.
+    m_claw.extendLeftPiston();
+    m_claw.extendRightPiston();
     m_claw.haltMotors(0);
 
   }
