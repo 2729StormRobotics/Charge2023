@@ -37,10 +37,13 @@ public class ClawEject extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     //after the game piece is ejected, the pistons return to the default position and motors are stopped.
+    if ((hasPieceCone() || hasPieceCube()) == false)) {
     m_claw.extendLeftPiston();
     m_claw.extendRightPiston();
     m_claw.haltMotors(0);
 
+    }
+    
   }
 
   // Returns true when the command should end.
